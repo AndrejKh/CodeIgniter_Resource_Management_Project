@@ -1,13 +1,15 @@
 
 USE db; -- insert correct database name...
 
+
+
 CREATE TABLE IF NOT EXISTS `user_account` (
-  `accountID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, --data types have to be the same when foreign key referencing, therefore can't reference username
+  `accountID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, 
   `username` VARCHAR(20) NOT NULL,
   `typeID` int(10) UNSIGNED NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`username`),
+  PRIMARY KEY (`accountID`),
   FOREIGN KEY (`typeID`) REFERENCES account_type(`typeID`)
 ) ENGINE = InnoDB;
 
@@ -26,7 +28,6 @@ CREATE TABLE IF NOT EXISTS `account_type`(
   `typeName` VARCHAR (20) NOT NULL,
   `description` VARCHAR (255),
   PRIMARY KEY (`typeID`),
-  FOREIGN KEY (`typeID`) REFERENCES user_account(`typeID`)
 ) ENGINE = InnoDB;
 
 -- not sure about foreign keys below. I think they're correct
@@ -51,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `project`(
   `budget` DECIMAL NOT NULL,
   `projectTypeID` VARCHAR(100),
   `completed` BIT(1) NOT NULL, -- 0 r 1, 0 false, 1 true (beter for storage than BOOL apparently.
-  PRIMARY KEY (`projectID`),
+  PRIMARY KEY (`projectID`)
 
 ) ENGINE = InnoDB;
 
@@ -81,8 +82,8 @@ CREATE TABLE IF NOT EXISTS `project_skills_required`(
 )ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `user_skills` (
-  `accountID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `skillID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `accountID` int(10) UNSIGNED NOT NULL,
+  `skillID` int(10) UNSIGNED NOT NULL,
   `experience` VARCHAR (255) NOT NULL,
   `achievements` VARCHAR (255) NOT NULL,
   PRIMARY KEY (`accountID`),
