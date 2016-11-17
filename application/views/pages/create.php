@@ -4,7 +4,7 @@
 
 	<fieldset>
 	<!-- Form Name -->
-	<legend>Register Profile</legend>
+	<legend>Register Account</legend>
 
 	<label class="col-md-7 control-label">Please fill in the details below(* denotes a required field)</label> <br/><br/>
 
