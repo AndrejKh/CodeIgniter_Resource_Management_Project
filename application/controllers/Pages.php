@@ -66,16 +66,12 @@ class Pages extends CI_Controller {
 			$this->load->view('pages/success');
 		}
 	}
-	
 	public function profile(){
 		
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		
 		$data['title'] = 'Edit profile';
-		
-		
-		
 		
 		
 		
@@ -90,6 +86,7 @@ class Pages extends CI_Controller {
 		{
 			$this->profile_model->set_news();
 			$this->load->view('pages/success');
-		}
+		} 
 }
+
 }
