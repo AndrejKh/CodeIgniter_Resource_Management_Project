@@ -18,8 +18,10 @@ class Profile_model extends CI_Model {
         return $query->row_array();
 }
 
-public function set_login($username, $password)
+public function set_login()
 {
+	$username = $this->input->post('username');
+	$password = $this->input->post('password');
 	$this->db->select('username', 'password');
 	$this->db->	from('user_account');
 	$this->db->	where('username',$username);
@@ -30,25 +32,13 @@ public function set_login($username, $password)
 	
 	if($query-> num_rows() == 1){
 		return $query->result();
-		}else{
-			return FALSE;			
-			}
-	
-	
-	
+	}else{
+		return FALSE;			
+	}
+
     $this->load->helper('url');
-    
+   
 
-    $accountData = array(
-        'username' => $this->input->get('username'),
-        'password' => $this->input->get('password'),
-    );
-    
-
-	
-	$a = $this->db->insert('user_account', $accountData);
-
-    return $a;
 }
 
 public function set_logout(){	
