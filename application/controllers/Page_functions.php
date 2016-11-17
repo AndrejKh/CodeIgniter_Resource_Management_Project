@@ -56,6 +56,7 @@ class Page_functions extends CI_Controller {
 		}
 		else
 		{
+			$this->profile_model->check_db();
 			$this->profile_model->set_login();
 			$this->load->view('pages/successful_login');
 		}

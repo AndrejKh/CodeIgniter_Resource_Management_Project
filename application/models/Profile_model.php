@@ -35,7 +35,7 @@ public function set_login($username, $password)
 			}
 	
 	
-	
+	check_db($password);
     $this->load->helper('url');
     
 
