@@ -36,6 +36,63 @@ class Page_functions extends CI_Controller {
         $this->load->view('templates/footer', $data);
 	}
 	
+		public function login()
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+
+		$data['title'] = 'Login to system';
+
+		$this->form_validation->set_rules('username', 'username', 'required');
+		$this->form_validation->set_rules('password', 'password', 'required');
+
+
+		if ($this->form_validation->run() === FALSE)
+		{
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/login');
+			$this->load->view('templates/footer');
+
+		}
+		else
+		{
+			$this->profile_model->set_login();
+			$this->load->view('pages/successful_login');
+		}
+	
+	}
+	
+	public function logout()
+	{
+		
+			$data['title'] = 'Logout system';
+		
+			$this->profile_model->set_logout();
+			$this->load->view('pages/successful_logout');
+	
+	}
+	
+	public function check_db($password){
+		
+		$username = $this->input->post('username');
+		$result = $this->user->login($username, $password);
+		
+		if($result){
+			$session_array = array();
+			
+			foreach($result as $row){
+				$session_array = array(
+					'username' => $row->username,
+				);
+			$this->session->set_userdata('logged_in', $session_array);
+			}
+		return TRUE;
+		} else{
+		$this->form_validation->set_message('check_db', 'Invalid username or password');
+		return FALSE;
+		}
+		
+	}
 		
 		
 	public function create()
@@ -50,7 +107,6 @@ class Page_functions extends CI_Controller {
 		$this->form_validation->set_rules('sname', 'sname', 'required');
 		$this->form_validation->set_rules('password', 'password', 'required');
 		$this->form_validation->set_rules('emailAddress', 'emailAddress', 'required');
-		$this->form_validation->set_rules('type', 'type', 'required');
 
 
 		if ($this->form_validation->run() === FALSE)
@@ -62,7 +118,7 @@ class Page_functions extends CI_Controller {
 		}
 		else
 		{
-			$this->profile_model->set_news();
+			$this->profile_model->set_account();
 			$this->load->view('pages/success');
 		}
 	}
@@ -73,12 +129,14 @@ class Page_functions extends CI_Controller {
 		
 		$data['title'] = 'Edit profile';
 		
-		$this->form_validation->set_rules('username', 'username', 'required');
 		$this->form_validation->set_rules('fname', 'fname', 'required');
 		$this->form_validation->set_rules('sname', 'sname', 'required');
-		$this->form_validation->set_rules('password', 'password', 'required');
+		$this->form_validation->set_rules('dob', 'dob', 'required');
+		
 		$this->form_validation->set_rules('emailAddress', 'emailAddress', 'required');
-		$this->form_validation->set_rules('type', 'type', 'required');
+		$this->form_validation->set_rules('religion', 'religion');
+		$this->form_validation->set_rules('LocationFlex', 'LocationFlex-0');
+
 		
 	
 		if ($this->form_validation->run() === FALSE)
@@ -90,8 +148,8 @@ class Page_functions extends CI_Controller {
 		}
 		else
 		{
-			$this->profile_model->set_news();
-			$this->load->view('pages/success');
+			$this->profile_model->set_profile();
+			$this->load->view('pages/success', $data);
 
 		} 
 }
