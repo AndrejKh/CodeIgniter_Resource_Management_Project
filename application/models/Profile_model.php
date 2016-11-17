@@ -51,10 +51,10 @@ public function set_login()
 
 public function set_logout(){	
 
-	$this->session->unset('username');
-	$this->session->unset('password');
+	$this->session->unset_userdata('username');
+	$this->session->unset_userdata('logged_in');
 	
-	$this->session->session_destroy();
+	$this->session->sess_destroy();
 	}
 
 public function set_account()
