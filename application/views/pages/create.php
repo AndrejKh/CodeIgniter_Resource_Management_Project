@@ -1,6 +1,6 @@
 <?php echo validation_errors(); ?>
 
-<?php echo form_open('pages/create'); ?>
+<?php echo form_open('create'); ?>
 
 	<fieldset>
 	<!-- Form Name -->

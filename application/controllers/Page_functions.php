@@ -95,8 +95,6 @@ class Page_functions extends CI_Controller {
 		$data['title'] = 'Register Profile';
 
 		$this->form_validation->set_rules('username', 'username', 'required');
-		$this->form_validation->set_rules('fname', 'fname', 'required');
-		$this->form_validation->set_rules('sname', 'sname', 'required');
 		$this->form_validation->set_rules('password', 'password', 'required');
 		$this->form_validation->set_rules('emailAddress', 'emailAddress', 'required');
 
