@@ -48,11 +48,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
+
+
+
+NOTE: initial character in route function is auto lower case, but every other character is case sensitive
 */
 
 
-$route['create'] = 'pages/create';
-$route['profile'] = 'pages/profile_edit';
-$route['(:any)'] = 'pages/view/$1';
-$route['default_controller'] = 'pages/index';
+$route['create'] = 'page_functions/create';
+$route['profile'] = 'page_functions/profile';
+$route['testing'] = 'page_functions/testing';
+$route['(:any)'] = 'page_functions/view/$1';
+$route['default_controller'] = 'page_functions/index';
 
