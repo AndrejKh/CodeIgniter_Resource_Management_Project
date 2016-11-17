@@ -45,32 +45,33 @@ class Page_functions extends CI_Controller {
 
 		$data['title'] = 'Login to system';
 
-		$this->form_validation->set_rules('username', 'username', 'required');
-		$this->form_validation->set_rules('password', 'password', 'required');
-		$data['retry'] = false;
+		$logged_in = $this->session->logged_in;
+		if($logged_in){
+			$this->load->view('pages/successful_login');
+		}else {
+			$this->form_validation->set_rules('username', 'username', 'required');
+			$this->form_validation->set_rules('password', 'password', 'required');
+			$data['retry'] = false;
 
-		if ($this->form_validation->run() === FALSE)
-		{
-			$this->load->view('templates/header', $data);
-			$this->load->view('pages/login');
-			$this->load->view('templates/footer');
-
-		}
-		else
-		{
-			$logged_in =  $this->profile_model->set_login();
-			if($logged_in) {
-				$this->load->view('pages/successful_login');
-			}else {
-				$data['retry'] = true;
+			if ($this->form_validation->run() === FALSE)
+			{
 				$this->load->view('templates/header', $data);
-				$this->load->view('pages/login', $data);
+				$this->load->view('pages/login');
 				$this->load->view('templates/footer');
 			}
-				
-
+			else
+			{
+				$correct =  $this->profile_model->set_login();
+				if($correct) {
+					$this->load->view('pages/successful_login');
+				}else {
+					$data['retry'] = true;
+					$this->load->view('templates/header', $data);
+					$this->load->view('pages/login', $data);
+					$this->load->view('templates/footer');
+				}
+			}
 		}
-	
 	}
 	
 	public function logout()

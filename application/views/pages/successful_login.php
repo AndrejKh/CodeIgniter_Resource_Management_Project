@@ -4,9 +4,9 @@
 <?php echo form_open('logout'); ?>
 
 <?php 
-	$id = session_id();
-	if($id){
-		echo 'session exists!';
+	$username = $this->session->username;
+	if($username){
+		echo 'Welcome user: '.$username;
 		}else {
 			echo 'session DOES NOT exist!';
 			}
@@ -17,9 +17,6 @@
 
 
 	<legend>LOGGED IN<legend>
-
-
-
 
 <!-- Button -->
 	<div class="form-group">

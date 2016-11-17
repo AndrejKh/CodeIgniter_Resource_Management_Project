@@ -31,6 +31,12 @@ public function set_login()
 	$query = $this->db->get();
 	
 	if($query-> num_rows() == 1){
+		$newsession = array(
+        'username'  => $username,
+        'logged_in' => TRUE
+		);
+
+		$this->session->set_userdata($newsession);
 		return $query->result();
 	}else{
 		return FALSE;			
