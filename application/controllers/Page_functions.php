@@ -6,6 +6,8 @@ class Page_functions extends CI_Controller {
 					parent::__construct();
 					$this->load->model('profile_model');
 					$this->load->helper('url_helper');
+					$this->load->library('session');
+
 			}
 
 
@@ -43,24 +45,34 @@ class Page_functions extends CI_Controller {
 
 		$data['title'] = 'Login to system';
 
-		$this->form_validation->set_rules('username', 'username', 'required');
-		$this->form_validation->set_rules('password', 'password', 'required');
-
-
-		if ($this->form_validation->run() === FALSE)
-		{
-			$this->load->view('templates/header', $data);
-			$this->load->view('pages/login');
-			$this->load->view('templates/footer');
-
-		}
-		else
-		{
-			$this->profile_model->check_db();
-			$this->profile_model->set_login();
+		$logged_in = $this->session->logged_in;
+		if($logged_in){
 			$this->load->view('pages/successful_login');
+		}else {
+			$this->form_validation->set_rules('username', 'username', 'required');
+			$this->form_validation->set_rules('password', 'password', 'required');
+			$data['retry'] = false;
+
+			if ($this->form_validation->run() === FALSE)
+			{
+				$this->load->view('templates/header', $data);
+				$this->load->view('pages/login');
+				$this->load->view('templates/footer');
+			}
+			else
+			{
+				$correct =  $this->profile_model->set_login();
+				if($correct) {
+					$this->load->view('pages/successful_login');
+				}else {
+					$data['retry'] = true;
+					$this->load->view('templates/header', $data);
+					$this->load->view('pages/login', $data);
+					$this->load->view('templates/footer');
+				}
+			}
 		}
-	
+
 	}
 	
 	public function logout()
@@ -72,28 +84,7 @@ class Page_functions extends CI_Controller {
 			$this->load->view('pages/successful_logout');
 	
 	}
-	
-	public function check_db($password){
-		
-		$username = $this->input->post('username');
-		$result = $this->user->login($username, $password);
-		
-		if($result){
-			$session_array = array();
-			
-			foreach($result as $row){
-				$session_array = array(
-					'username' => $row->username,
-				);
-			$this->session->set_userdata('logged_in', $session_array);
-			}
-		return TRUE;
-		} else{
-		$this->form_validation->set_message('check_db', 'Invalid username or password');
-		return FALSE;
-		}
-		
-	}
+
 		
 		
 	public function create()

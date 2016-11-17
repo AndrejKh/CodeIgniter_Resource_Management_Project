@@ -1,15 +1,15 @@
 <?php echo validation_errors(); ?>
 
 <!-- FIND THE title VARIABLE BELOW -->
+<?php if ($retry == true ){echo "<h2 style= 'color: red'>Incorrect Username or Password entered, please try again</h2>";} ?>
 
-<!-- <?php  echo $title ?> -->
 <?php echo form_open('login'); ?>
 
 	<fieldset>
 	<!-- Form Name -->
 
 
-	<legend>Login to system<legend>
+	<!-- <legend>Login to system<legend> -->
 
 
 	<label class="col-md-7 control-label">Please fill in the details below(* denotes a required field)</label> <br/><br/>
