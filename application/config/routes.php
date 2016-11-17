@@ -54,3 +54,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['create'] = 'pages/create';
 $route['(:any)'] = 'pages/view/$1';
 $route['default_controller'] = 'pages/index';
+$route['profile'] = 'pages/profile';

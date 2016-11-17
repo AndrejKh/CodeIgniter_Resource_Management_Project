@@ -66,4 +66,30 @@ class Pages extends CI_Controller {
 			$this->load->view('pages/success');
 		}
 	}
+	
+	public function profile(){
+		
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		
+		$data['title'] = 'Edit profile';
+		
+		
+		
+		
+		
+		
+		if ($this->form_validation->run() === FALSE)
+		{
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/profile_edit');
+			$this->load->view('templates/footer');
+
+		}
+		else
+		{
+			$this->profile_model->set_news();
+			$this->load->view('pages/success');
+		}
+}
 }
