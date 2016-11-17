@@ -23,6 +23,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
+
+//Commented until final/demo release as this would hardset the user directory being used
+//$config['base_url'] = 'http://www2.macs.hw.ac.uk/~gg3/';
+
+
 $config['base_url'] = '';
 
 /*
