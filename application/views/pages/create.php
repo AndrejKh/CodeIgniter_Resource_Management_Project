@@ -5,7 +5,7 @@
 	<fieldset>
 	<!-- Form Name -->
 
-	<legend>Register Account TEST BRANCH ////// 11111111111</legend>
+	<legend>Register Account TEST change ////// 11111111111</legend>
 
 
 	<label class="col-md-7 control-label">Please fill in the details below(* denotes a required field)</label> <br/><br/>
