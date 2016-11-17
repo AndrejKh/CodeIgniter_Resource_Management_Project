@@ -72,6 +72,7 @@ class Page_functions extends CI_Controller {
 				}
 			}
 		}
+
 	}
 	
 	public function logout()

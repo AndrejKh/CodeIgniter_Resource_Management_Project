@@ -38,9 +38,11 @@ public function set_login()
 
 		$this->session->set_userdata($newsession);
 		return $query->result();
+
 	}else{
 		return FALSE;			
 	}
+
 
     $this->load->helper('url');
    
