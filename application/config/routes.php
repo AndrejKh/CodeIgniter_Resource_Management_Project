@@ -54,7 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 NOTE: initial character in route function is auto lower case, but every other character is case sensitive
 */
 
-
+$route['login'] = 'page_functions/login';
 $route['create'] = 'page_functions/create';
 $route['profile'] = 'page_functions/profile';
 $route['testing'] = 'page_functions/testing';
