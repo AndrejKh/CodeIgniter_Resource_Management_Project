@@ -75,10 +75,6 @@ class Pages extends CI_Controller {
 		$data['title'] = 'Edit profile';
 		
 		
-		
-		
-		
-		
 		if ($this->form_validation->run() === FALSE)
 		{
 			$this->load->view('templates/header', $data);
@@ -92,4 +88,18 @@ class Pages extends CI_Controller {
 			$this->load->view('pages/success');
 		}
 }
+
+
+		public function testing(){
+
+        $data['news'] = $this->profile_model->get_news();
+        $data['title'] = 'Project archive';
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('pages/index', $data);        
+        $this->load->view('templates/footer', $data);
+	}
+	
+	
+	
 }
