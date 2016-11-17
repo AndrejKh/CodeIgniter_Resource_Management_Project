@@ -4,8 +4,12 @@
 
 	<fieldset>
 	<!-- Form Name -->
+<<<<<<< HEAD
 	<legend>Register Account ////// MASTER COMMIT UNDO</legend>
-
+=======
+	<legend>Register Account TEST BRANCH //////</legend>
+>>>>>>> 24e8af9ef55e3d44685964349e798d8a61064d25
+11111111111
 	<label class="col-md-7 control-label">Please fill in the details below(* denotes a required field)</label> <br/><br/>
 
 	<!-- Text input-->
