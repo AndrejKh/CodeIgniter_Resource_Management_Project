@@ -102,8 +102,11 @@
 	  <div class="col-md-4">
 	  <div class="checkbox">
 		<label for="locationFlex-0">
-		  <input type="radio" name="locationFlex" id="locationFlex-0" value="0" required=""> Able to relocate
-		  <input type="radio" name="locationFlex" id="locationFlex-1" value ="1" style="margin-left: 20px"> In-able to relocate
+		
+	<!-- RADIO BUTTONS BUGGY AF -->			
+			
+		  <input type="radio" name="locationFlex" id="locationFlex" value="0" required=""> Able to relocate
+		  <input type="radio" name="locationFlex" id="locationFlex" value ="1" style="margin-left: 20px"> In-able to relocate
 		</label>
 		</div>
 	  </div>

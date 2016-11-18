@@ -83,7 +83,7 @@ public function set_profile()
 {
     $this->load->helper('url');
     
-   $accountID = $this->db->get('user_account', 'accountID');
+   $accountID = $this->session->accountID;
     
 	$addressData = array(
 			'country' => $this->input->post('country'),
@@ -95,17 +95,18 @@ public function set_profile()
 		
 		
 	$this->db->insert('address', $addressData);
-	$addressID = $this->db->get('address', 'addressID');
+	$addressID = $this->db->insert_id();
 	
+	echo $accountID. ' '. $addressID;
 		
 	$profileData = array(
-			'accountID' => $this->input->post($accountID),
+			'accountID' => ($accountID),
          'firstname' => $this->input->post('fname'),
          'lastname' => $this->input->post('sname'),
-			'addressID' => $this->input->post($addressID),
+			'addressID' => ($addressID),
          'dob' => $this->input->post('dob'),
          'religion' => $this->input->post('religion'),
-         'locationFlexibility' => $this->input->post('locationFlex'),
+         'locationFlexibility' => $this->input->post('locationFlex')
     );
     
     $this->db->insert('person', $profileData);
