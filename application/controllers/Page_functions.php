@@ -154,9 +154,8 @@ class Page_functions extends CI_Controller {
 		$this->form_validation->set_rules('sname', 'sname', 'required');
 		$this->form_validation->set_rules('dob', 'dob', 'required');
 		
-		$this->form_validation->set_rules('emailAddress', 'emailAddress', 'required');
 		$this->form_validation->set_rules('religion', 'religion');
-		$this->form_validation->set_rules('LocationFlex', 'LocationFlex-0');
+		$this->form_validation->set_rules('LocationFlex', 'LocationFlex');
 		
 		
 		$this->form_validation->set_rules('country', 'country', 'required');
