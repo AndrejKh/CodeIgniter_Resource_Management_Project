@@ -13,7 +13,31 @@
 				<meta charset="utf-8"> 
 
 				<title>CodeIgniter Tutorial</title>
+			
         </head>
-        <body>
+        
+        <body onload="document.getElementById('time').innerHTML = ' <?php echo $this->session->sess_expiration   ?> ';">
+                <h1><?php echo $title; echo "expirtes in "; echo $this->session->sess_expiration; ?></h1>
+                <label id="SessionTimeLb">SessionTime</label>
+                <p id="time"></p>
+                
+             	<script type="text/javascript">
 
-                <h1><?php echo $title; ?></h1>
+				   	var sessionTimeout = 10;
+			        function DisplaySessionTimeout()
+			        {
+			            //assigning minutes left to session timeout to Label
+			            document.getElementById("SessionTime").innerHTML = sessionTimeout;
+			            sessionTimeout = sessionTimeout - 1;
+			            
+			            //if session is not less than 0
+			            if (sessionTimeout >= 3)
+			                //call the function again after 1 minute delay
+
+			            else
+			            {
+			                //show message box
+			                alert("Your current Session is nearly over.");
+			            }
+			        }	
+			</script>

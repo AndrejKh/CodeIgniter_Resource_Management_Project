@@ -54,7 +54,6 @@ class Page_functions extends CI_Controller {
 	
 		public function login()
 	{		
-		echo 'hello '.site_url().' and '.current_url() .' and '.base_url().' check is  my uri<br>';
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
@@ -62,7 +61,7 @@ class Page_functions extends CI_Controller {
 
 		$logged_in = $this->session->logged_in;
 		if($logged_in){
-			$this->load->redirect('pages/successful_login');
+			redirect('successful_login');
 		}else {
 			$this->form_validation->set_rules('username', 'username', 'required');
 			$this->form_validation->set_rules('password', 'password', 'required');
