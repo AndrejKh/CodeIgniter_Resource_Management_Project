@@ -22,7 +22,7 @@ public function set_login()
 {
 	$username = $this->input->post('username');
 	$password = $this->input->post('password');
-	$this->db->select('username', 'password');
+	$this->db->select('accountID','username', 'password');
 	$this->db->	from('user_account');
 	$this->db->	where('username',$username);
 	$this->db->	where('password',$password);
@@ -31,7 +31,9 @@ public function set_login()
 	$query = $this->db->get();
 	
 	if($query-> num_rows() == 1){
+		$accountID = $query->result()[0]->accountID;
 		$newsession = array(
+		  'accountID' => $accountID,
         'username'  => $username,
         'logged_in' => TRUE
 		);
