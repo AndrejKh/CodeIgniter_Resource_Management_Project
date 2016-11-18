@@ -83,26 +83,52 @@ public function set_profile()
 {
     $this->load->helper('url');
     
-
-    $profileData = array(
-        'firstname' => $this->input->post('fname'),
-        'lastname' => $this->input->post('sname'),
-        'dob' => $this->input->post('dob'),
-        'religion' => $this->input->post('religion'),
-        'locationFlexibility' => $this->input->post('locationFlex'),
+   $accountID = $this->db->get('user_account', 'accountID');
+    
+	$addressData = array(
+			'country' => $this->input->post('country'),
+			'city' => $this->input->post('city'),
+			'postcode' => $this->input->post('postcode'),
+			'streetName' => $this->input->post('streetName'),
+			'country' => $this->input->post('country')
+		);
+		
+		
+	$this->db->insert('address', $addressData);
+	$addressID = $this->db->get('address', 'addressID');
+	
+		
+	$profileData = array(
+			'accountID' => $this->input->post($accountID),
+         'firstname' => $this->input->post('fname'),
+         'lastname' => $this->input->post('sname'),
+			'addressID' => $this->input->post($addressID),
+         'dob' => $this->input->post('dob'),
+         'religion' => $this->input->post('religion'),
+         'locationFlexibility' => $this->input->post('locationFlex'),
     );
     
-   
-	$addressData = array(
+    $this->db->insert('person', $profileData);
+	
+	$info = array(
+		$profileData, 
+		$addressData
+	);
+	
+	
+	return $info;
+			
+			
+			
 	
 	/* 
 		1. CREATE LOGIN PAGE
 		2. CREATE SESSIONS WHEN LOGGED IN
 		3. Get the username of the account in session.
 		4. when posting... SQL query: insert into address the following where username in session is...
-	*/
 	
-		/* Below is the following data from form table that will be posted to address table in db*/
+	
+		 Below is the following data from form table that will be posted to address table in db
 		'country' => $this->input->post('country'),
 		'city' => $this->input->post('city'),
 		'postcode' => $this->input->post('postcode'),
@@ -120,7 +146,7 @@ public function set_profile()
 		$b
 	);
 
-    return $a;
+    return $a; */
 }
 
 	

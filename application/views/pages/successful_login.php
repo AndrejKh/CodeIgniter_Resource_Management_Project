@@ -25,5 +25,26 @@
 	  </div>
 	</div>
 	
+	
+	</fieldset>
+	</form>
+	
+	
+<?php echo form_open('profile'); ?>
+
+
+	<fieldset>
+	<!-- Form Name -->
+
+<legend> EDIT PROFILE</legend>
+
+<!-- Button -->
+	<div class="form-group">
+	  <div class="col-md-9 control-label">
+		<button id="submit" name="submit" type="submit" class="btn btn-primary btn-lg">Edit Profile</button>
+	  </div>
+	</div>
+	
+	
 	</fieldset>
 	</form>

@@ -40,17 +40,6 @@
 	  <span class="help-block">Enter your date of birth above</span>  
 	  </div>
 	</div>
-
-
-
-	<!-- Text input-->
-	<div class="form-group">
-	  <label class="col-md-4 control-label" for="emailAddress">Email: </label>  
-	  <div class="col-md-5">
-	  <input id="emailAddress" name="emailAddress" type="email" placeholder="joebloggs@imaginary.com" class="form-control input-md" required="">
-	  <span class="help-block">Please enter a valid email address</span>  
-	  </div>
-	</div>
 	
 	<!-- Text input-->
 	<div class="form-group">
