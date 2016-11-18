@@ -1,11 +1,12 @@
 <?php echo validation_errors(); ?>
 
 <!-- FIND THE title VARIABLE BELOW -->
-<?php if ($retry == true ){echo "<h2 style= 'color: red'>Incorrect Username or Password entered, please try again</h2>";} ?>
-<?php      
+<?php 
+	if(isset($retry)) { 
+		if($retry == true ){echo "<h2 style= 'color: red'>Incorrect Username or Password entered, please try again</h2>";} 
+	}?>
+<?php if(isset($created)){ echo '<h2>'.$created.'</h2>'; } ?>
 
-
-?>
 <?php echo form_open('login'); ?>
 
 	<fieldset>
