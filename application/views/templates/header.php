@@ -17,13 +17,12 @@
         </head>
         
         <body onload="document.getElementById('time').innerHTML = ' <?php echo $this->session->sess_expiration   ?> ';">
-                <h1><?php echo $title; echo "expirtes in "; echo $this->session->sess_expiration; ?></h1>
+                <h1><?php echo $title; echo "exp time:".$this->config->item("sess_expiration"); ?></h1>
                 <label id="SessionTimeLb">SessionTime</label>
                 <p id="time"></p>
                 
              	<script type="text/javascript">
 
-				   	var sessionTimeout = 10;
 			        function DisplaySessionTimeout()
 			        {
 			            //assigning minutes left to session timeout to Label
