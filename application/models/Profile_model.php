@@ -51,6 +51,7 @@ public function set_login()
 
 public function set_logout(){	
 
+
 	$this->session->unset_userdata('username');
 	$this->session->unset_userdata('logged_in');
 	

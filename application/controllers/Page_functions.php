@@ -7,6 +7,11 @@ class Page_functions extends CI_Controller {
 					$this->load->model('profile_model');
 					$this->load->helper('url_helper');
 					$this->load->library('session');
+					
+					if(empty($this->session->userdata('logged_in'))){
+						//redirect('login');
+						echo 'You are not logged in';					
+					} 
 
 			}
 
@@ -47,7 +52,7 @@ class Page_functions extends CI_Controller {
 
 		$logged_in = $this->session->logged_in;
 		if($logged_in){
-			$this->load->view('pages/successful_login');
+			$this->load->redirect('pages/successful_login');
 		}else {
 			$this->form_validation->set_rules('username', 'username', 'required');
 			$this->form_validation->set_rules('password', 'password', 'required');
@@ -63,7 +68,7 @@ class Page_functions extends CI_Controller {
 			{
 				$correct =  $this->profile_model->set_login();
 				if($correct) {
-					$this->load->view('pages/successful_login');
+					redirect('successful_login');
 				}else {
 					$data['retry'] = true;
 					$this->load->view('templates/header', $data);
@@ -75,6 +80,14 @@ class Page_functions extends CI_Controller {
 
 	}
 	
+	
+	public function successful_login(){
+				$data['title'] = 'Login to system';
+				$this->load->view('templates/header', $data);
+				$this->load->view('pages/successful_login');
+				$this->load->view('templates/footer');
+		
+		}
 	public function logout()
 	{
 		

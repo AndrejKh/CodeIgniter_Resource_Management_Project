@@ -55,6 +55,7 @@ NOTE: initial character in route function is auto lower case, but every other ch
 */
 
 $route['login'] = 'page_functions/login';
+$route['successul_login'] = 'page_functions/successful_login';
 $route['create'] = 'page_functions/create';
 $route['profile'] = 'page_functions/profile';
 $route['logout'] = 'page_functions/logout';

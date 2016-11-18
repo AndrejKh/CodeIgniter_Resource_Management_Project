@@ -2,7 +2,10 @@
 
 <!-- FIND THE title VARIABLE BELOW -->
 <?php if ($retry == true ){echo "<h2 style= 'color: red'>Incorrect Username or Password entered, please try again</h2>";} ?>
+<?php      
 
+
+?>
 <?php echo form_open('login'); ?>
 
 	<fieldset>
