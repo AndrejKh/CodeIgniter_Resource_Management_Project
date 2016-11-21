@@ -13,30 +13,38 @@
 				<meta charset="utf-8"> 
 
 				<title>CodeIgniter Tutorial</title>
-			
-        </head>
-        
-        <body onload="document.getElementById('time').innerHTML = ' <?php echo $this->session->sess_expiration   ?> ';">
-                <h1><?php echo $title; echo "exp time:".$this->config->item("sess_expiration"); ?></h1>
-                <label id="SessionTimeLb">SessionTime</label>
-                <p id="time"></p>
-                
-             	<script type="text/javascript">
-
+				<script type="text/javascript">
+						var sessionTimeout = <?php echo $this->config->item("sess_expiration"); ?> ; 
+						
 			        function DisplaySessionTimeout()
 			        {
 			            //assigning minutes left to session timeout to Label
-			            document.getElementById("SessionTime").innerHTML = sessionTimeout;
-			            sessionTimeout = sessionTimeout - 1;
+							$("#timeDiv").show();
+			            sessionTimeout = sessionTimeout - 1 ;
 			            
 			            //if session is not less than 0
-			            if (sessionTimeout >= 3)
-			                //call the function again after 1 minute delay
-
+			            if (sessionTimeout >= 5){
+			            	$("#time").text(sessionTimeout); //call the function again after 1 minute delay
+								setTimeout(DisplaySessionTimeout,1000);
+			        		}
 			            else
 			            {
 			                //show message box
-			                alert("Your current Session is nearly over.");
+			              	if(sessionTimeout == 4) {alert("Your current Session is nearly over.");}
+			              	if(sessionTimeout == 0) {window.location.href = '<?php echo site_url()."/login" ?>';}
+      						$("#time").text(sessionTimeout); //call the function again after 1 minute delay
+								setTimeout(DisplaySessionTimeout,1000);
 			            }
 			        }	
 			</script>
+        </head>
+        
+        <body onload="if(<?php echo $this->session->logged_in ?>){DisplaySessionTimeout();}">
+                <h1><?php echo $title; echo "exp time:".$this->config->item("sess_expiration"); ?></h1>
+                <div id="timeDiv" style="display:none; "  >
+                	<label id="SessionTimeLb" style="float:left;">SessionTime: </label>
+                	<p id="time" ></p>
+                </div>
+                
+                
+             
