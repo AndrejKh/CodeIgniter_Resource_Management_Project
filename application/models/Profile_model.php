@@ -79,18 +79,120 @@ public function set_account()
     return $a;
 }
 
+	
+	public function load_profile(){
+		$accountID = $this->session->accountID;
+		
+		$this->db-> select('*');
+		$this->db->	from('person');
+		$this->db->	where('accountID',$accountID);
+		$this->db-> limit(1);
+		
+		$query = $this->db->get();
+		
+		if($query-> num_rows() != 1){
+			return;
+		}
+		$personData = $query->result()[0];
+		$addressID = $query->result()[0]->addressID;
+		
+		$this->db-> select('*');
+		$this->db->	from('address');
+		$this->db->	where('addressID',$addressID);
+		$this->db-> limit(1);
+		
+		$query = $this->db->get();
+		
+		if($query-> num_rows() != 1){
+			return;
+		}
+		$addressData = $query->result()[0];
+		
+		$info =  array(
+			'profile' => $personData, 
+			'address' => $addressData
+		);
+		
+		return $info;
+	}
+	
+
+	public function edit_profile()
+	{
+	    $this->load->helper('url');
+	    
+	   $accountID = $this->session->accountID;
+	    
+	   $this->db->select('addressID');
+		$this->db->	from('person');
+		$this->db->	where('accountID',$accountID);
+		$this->db->limit(1);
+		
+		$query = $this->db->get();
+		
+		if($query-> num_rows() == 1){
+			$addressID = $query->result()[0]->addressID;
+		}
+	    
+		$addressData = array(
+				'country' => $this->input->post('country'),
+				'city' => $this->input->post('city'),
+				'postcode' => $this->input->post('postcode'),
+				'streetName' => $this->input->post('streetName'),
+				'country' => $this->input->post('country'),
+				'buldingNumber' => $this->input->post('buildingNumber')
+			);
+			
+		$this->db->	where('addressID',$addressID);	
+		$this->db->update('address', $addressData);
+
+		
+		echo $accountID. ' '. $addressID;
+			
+		$profileData = array(
+				'accountID' => ($accountID),
+	         'firstname' => $this->input->post('fname'),
+	         'lastname' => $this->input->post('sname'),
+				'addressID' => ($addressID),
+	         'dob' => $this->input->post('dob'),
+	         'religion' => $this->input->post('religion'),
+	         'locationFlexibility' => $this->input->post('locationFlex') == "able" ? 1 : 0
+	    );
+	    
+	  	$this->db->	where('accountID',$accountID);	
+	  	$this->db->update('person', $profileData);
+
+	}
+
+
+
+
 public function set_profile()
 {
     $this->load->helper('url');
     
    $accountID = $this->session->accountID;
+   //check if already registerred
+	$this->db->select('personID');
+	$this->db->	from('person');
+	$this->db->	where('accountID',$accountID);
+	$this->db->limit(1);
+	
+	$query = $this->db->get();
+	
+	if($query-> num_rows() == 1){
+		$this->profile_model->edit_profile();
+		return;
+	}
+   
     
 	$addressData = array(
 			'country' => $this->input->post('country'),
 			'city' => $this->input->post('city'),
 			'postcode' => $this->input->post('postcode'),
 			'streetName' => $this->input->post('streetName'),
-			'country' => $this->input->post('country')
+			'country' => $this->input->post('country'),
+			'buldingNumber' => $this->input->post('buildingNumber')
 		);
 		
 		
@@ -106,14 +208,14 @@ public function set_profile()
 			'addressID' => ($addressID),
          'dob' => $this->input->post('dob'),
          'religion' => $this->input->post('religion'),
-         'locationFlexibility' => $this->input->post('locationFlex')
+         'locationFlexibility' => $this->input->post('locationFlex') == "able" ? 1 : 0
     );
     
     $this->db->insert('person', $profileData);
 	
 	$info = array(
-		$profileData, 
-		$addressData
+		'profile' => $profileData, 
+		'address' => $addressData
 	);
 	
 	
@@ -149,6 +251,7 @@ public function set_profile()
 
     return $a; */
 }
+
 
 	
 }

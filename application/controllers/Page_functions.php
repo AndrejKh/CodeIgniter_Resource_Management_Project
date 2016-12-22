@@ -164,8 +164,8 @@ class Page_functions extends CI_Controller {
 		$this->form_validation->set_rules('streetName', 'streetName', 'required');
 		$this->form_validation->set_rules('buildingNumber', 'buildingNumber', 'required');
 
+		$data['info'] =  $this->profile_model->load_profile();
 		
-	
 		if ($this->form_validation->run() === FALSE)
 		{
 			$this->load->view('templates/header', $data);
@@ -187,6 +187,7 @@ public function viewprofile(){
 			$this->load->library('form_validation');
 		
 			$data['title'] = 'Login to system';
+			$this->profile_model->load_profile();
 			$this->load->view('templates/profile_header', $data);
 			$this->load->view('pages/show_profile');
 			$this->load->view('templates/footer');
