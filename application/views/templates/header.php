@@ -16,7 +16,7 @@
 			//assigning minutes left to session timeout to Label
 				$("#timeDiv").show();
 			sessionTimeout = sessionTimeout - 1 ;
-			
+			alert("hey");
 			//if session is not less than 0
 			if (sessionTimeout >= 5){
 				$("#time").text(sessionTimeout); //call the function again after 1 minute delay
@@ -33,7 +33,7 @@
 		}	
 	</script>
 </head> 
-<body onload="if(<?php echo $this->session->logged_in ?>){DisplaySessionTimeout();}">
+<body onload="if(<?php if (isset($this->session->logged_in) ) { echo $this->session->logged_in; } else  {echo 'false';} ?>){DisplaySessionTimeout();}">
 	<div class="jumbotron text-center">
 		<h1>PlanWise</h1>
 	</div>
@@ -43,7 +43,7 @@
 				<a class="navbar-brand" href="#">PlanWise</a>
 			</div>
 			<ul class="nav navbar-nav navbar-right">
-				<li class="active"><a href="#">Home</a></li>
+				<li class="active"><a href="viewprofile">Home</a></li>
 				<li><a href="#">Company</a></li>
 				<li><a href="#">Blog</a></li>
 			</ul>
@@ -51,7 +51,7 @@
 	</nav>
 	<div id="timeDiv" style="display:none; "  >
 		<label id="SessionTimeLb" style="float:left;">SessionTime: </label>
-		<p id="time" ></p>
+		<p id="time" >1</p>
 	</div>
 	
                 

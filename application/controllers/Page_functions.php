@@ -7,6 +7,8 @@ class Page_functions extends CI_Controller {
 					$this->load->model('profile_model');
 					$this->load->helper('url_helper');
 					$this->load->library('session');
+					$this->load->helper('url');
+
 				
 			}
 
@@ -18,8 +20,8 @@ class Page_functions extends CI_Controller {
 					$data['title'] = 'Restricted Page, Please log in';
 					$this->load->view('templates/header', $data);
 					$this->load->view('templates/footer');
-					
-					$this->output->set_header('refresh:3; url='.site_url('login'));
+					redirect('login', 'refresh');
+					//$this->output->set_header('refresh:3; url='.site_url('login'));
 				}
 				return false;					
 			}
@@ -52,68 +54,6 @@ class Page_functions extends CI_Controller {
         $this->load->view('templates/footer', $data);
 	}
 	
-		public function login()
-	{		
-		$this->load->helper('form');
-		$this->load->library('form_validation');
-
-		$data['title'] = 'Login to system';
-
-		$logged_in = $this->session->logged_in;
-		if($logged_in){
-			redirect('successful_login');
-		}else {
-			$this->form_validation->set_rules('username', 'username', 'required');
-			$this->form_validation->set_rules('password', 'password', 'required');
-			$data['retry'] = false;
-
-			if ($this->form_validation->run() === FALSE)
-			{
-				$this->load->view('templates/header', $data);
-				$this->load->view('pages/login');
-				$this->load->view('templates/footer');
-			}
-			else
-			{
-				$correct =  $this->profile_model->set_login();
-				if($correct) {
-					redirect('successful_login');
-				}else {
-					$data['retry'] = true;
-					$this->load->view('templates/header', $data);
-					$this->load->view('pages/login', $data);
-					$this->load->view('templates/footer');
-				}
-			}
-		}
-
-	}
-	
-	
-	public function successful_login(){
-			$this->check_restricted();
-			$this->load->helper('form');
-			$this->load->library('form_validation');
-		
-			$data['title'] = 'Login to system';
-			$this->load->view('templates/header', $data);
-			$this->load->view('pages/successful_login');
-			$this->load->view('templates/footer');
-		
-		}
-	public function logout()
-	{
-			//$this->profile_model->set_logout();
-			if($this->check_restricted() == false) {return;};
-			$data['title'] = 'Logout system';
-		
-			$this->profile_model->set_logout();
-			$this->load->view('templates/header', $data);
-			$this->load->view('pages/successful_logout');
-			//$this->output->set_header('refresh:5; url='.site_url('successful_logout'));
-	}
-
-		
 		
 	public function create()
 	{
@@ -193,17 +133,6 @@ public function viewprofile(){
 			$this->load->view('templates/footer');
 		
 		}
-
-
-		public function testing(){
-
-        $data['news'] = $this->profile_model->get_news();
-        $data['title'] = 'Project archive';
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('pages/index', $data);        
-        $this->load->view('templates/footer', $data);
-	}
 	
 	
 }

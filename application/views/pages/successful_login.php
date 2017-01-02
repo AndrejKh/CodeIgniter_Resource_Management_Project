@@ -8,7 +8,7 @@
 	if($username){
 		echo 'Welcome user: '.$username." with ID ". $this->session->accountID;
 		}else {
-			redirect('login');
+			//redirect('login');
 			}
 ?>
 

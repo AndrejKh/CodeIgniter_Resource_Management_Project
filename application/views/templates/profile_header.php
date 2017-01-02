@@ -13,25 +13,26 @@
 	<script src="<?php echo base_url()?>/js/modernizr.js"></script> <!-- Modernizr -->
 	<title><?php echo $title; ?></title>
 	<script type="text/javascript">
-		var sessionTimeout = <?php echo $this->config->item("sess_expiration"); ?> * 1000 ; 
+		var sessionTimeout = <?php echo $this->config->item("sess_expiration"); ?> ; 
 			
 		function DisplaySessionTimeout()
 		{
 			//assigning minutes left to session timeout to Label
+				$("#timeDiv").show();
 			sessionTimeout = sessionTimeout - 1 ;
 			
 			//if session is not less than 0
-			if (sessionTimeout >= 500000){
-				//$("#time").text(sessionTimeout); //call the function again after 1 minute delay
-				setTimeout(DisplaySessionTimeout,1000);
-			}
+			if (sessionTimeout >= 5){
+				$("#time").text(sessionTimeout); //call the function again after 1 minute delay
+					setTimeout(DisplaySessionTimeout,1000);
+				}
 			else
 			{
 				//show message box
-				if(sessionTimeout == 499999) {alert("Your current Session is nearly over.");}
+				if(sessionTimeout == 4) {alert("Your current Session is nearly over.");}
 				if(sessionTimeout == 0) {window.location.href = '<?php echo site_url()."/login" ?>';}
-				//$("#time").text(sessionTimeout); //call the function again after 1 minute delay
-				setTimeout(DisplaySessionTimeout,1000);
+				$("#time").text(sessionTimeout); //call the function again after 1 minute delay
+					setTimeout(DisplaySessionTimeout,1000);
 			}
 		}	
 	</script>
@@ -46,6 +47,10 @@
     </button>
       </div>
   </div>
+  <div id="timeDiv" style="display:none; "  >
+		<label id="SessionTimeLb" style="float:left;">SessionTime: </label>
+		<p id="time" ></p>
+	</div>
 <div class="page-header">
   <h4>User Account </h4>
 </div>
@@ -85,7 +90,9 @@
   <div class="container">
       <div class="col-sm-2" style="padding-right:0px; margin-top:5px; padding-top:15px; margin-left:-20px; ">
         <div class="row">
-          <button type="submit" class="btn btn-default search-btn">Yes</button>
+			<form action="logout">
+				<button type="submit" class="btn btn-default search-btn ">Yes</button>
+			</form>
         </div>
       </div>
             <div class="row">
