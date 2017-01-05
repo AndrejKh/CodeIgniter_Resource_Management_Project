@@ -1,0 +1,1 @@
+<h1>Restricted Page, Redirecting to Login Page</h1>
