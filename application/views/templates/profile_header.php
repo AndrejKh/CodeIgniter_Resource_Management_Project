@@ -62,7 +62,7 @@
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#">Home</a></li>
       <li class="active"><a href="#">My Account</a></li>
-      <li><a href="#">Create Project</a></li>
+      <li><a href="create_project">Create Project</a></li>
       <li><a href="#">Company</a></li>
       <li><a href="#">Blog</a></li>
       <li><a href="#" data-toggle="modal" data-target="#myModal">Log Out</a></li>

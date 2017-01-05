@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+    <style>#datetimepicker5{z-index:1500 !important;}</style>
+
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/css/mystyle.css">
@@ -7,6 +9,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   
 	<title><?php echo $title; ?></title>
 	<script type="text/javascript">
 		var sessionTimeout = <?php echo $this->config->item("sess_expiration"); ?> ; 
@@ -16,7 +19,6 @@
 			//assigning minutes left to session timeout to Label
 				$("#timeDiv").show();
 			sessionTimeout = sessionTimeout - 1 ;
-			alert("hey");
 			//if session is not less than 0
 			if (sessionTimeout >= 5){
 				$("#time").text(sessionTimeout); //call the function again after 1 minute delay
@@ -43,7 +45,7 @@
 				<a class="navbar-brand" href="#">PlanWise</a>
 			</div>
 			<ul class="nav navbar-nav navbar-right">
-				<li class="active"><a href="viewprofile">Home</a></li>
+				<li class="active"><a href="view_profile">Home</a></li>
 				<li><a href="#">Company</a></li>
 				<li><a href="#">Blog</a></li>
 			</ul>

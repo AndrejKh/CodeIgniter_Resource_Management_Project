@@ -1,5 +1,5 @@
 <?php
-class Profile_model extends CI_Model {
+class Project_model extends CI_Model {
 
         public function __construct()
         {
@@ -80,40 +80,37 @@ public function set_account()
 }
 
 	
-	public function load_profile(){
-		$accountID = $this->session->accountID;
-		
-		$this->db-> select('*');
-		$this->db->	from('person');
-		$this->db->	where('accountID',$accountID);
-		$this->db-> limit(1);
+	public function load_skills(){
+		//query existing skill names
+		$this->db-> select('skillName');
+		$this->db->	from('skills');
 		
 		$query = $this->db->get();
 		
-		if($query-> num_rows() != 1){
+		if($query-> num_rows()  == 0){
 			return;
 		}
-		$personData = $query->result()[0];
-		$addressID = $query->result()[0]->addressID;
+		$skillNames = $query->result_array();
 		
-		$this->db-> select('*');
-		$this->db->	from('address');
-		$this->db->	where('addressID',$addressID);
-		$this->db-> limit(1);
+        
+        //query existing skill levels
+		$this->db-> select('level');
+		$this->db->	from('skillLevel');
+ 
 		
 		$query = $this->db->get();
 		
-		if($query-> num_rows() != 1){
+		if($query-> num_rows() == 0){
 			return;
 		}
-		$addressData = $query->result()[0];
-		
-		$info =  array(
-			'profile' => $personData, 
-			'address' => $addressData
+		$skillLevels = $query->result_array();
+		//put skill names and levels into an array
+		$skills =  array(
+			'names' => $skillNames, 
+			'levels' => $skillLevels
 		);
 		
-		return $info;
+		return $skills;
 	}
 	
 
@@ -167,88 +164,26 @@ public function set_account()
 
 
 
-public function set_profile()
+public function set_project()
 {
     $this->load->helper('url');
     
    $accountID = $this->session->accountID;
-   //check if already registerred
-	$this->db->select('personID');
-	$this->db->	from('person');
-	$this->db->	where('accountID',$accountID);
-	$this->db->limit(1);
-	
-	$query = $this->db->get();
-	
-	if($query-> num_rows() == 1){
-		$this->profile_model->edit_profile();
-		return;
-	}
    
-//    projectID	title	startDate	endDate	budget	projectTypeID	completed
+   
+//    projectID managerID	title	startDate	endDate	budget	projectTypeID	completed
 	$projectData = array(
-			'title' => $this->input->post('country'),
-			'startDate' => $this->input->post('city'),
-			'endDate' => $this->input->post('postcode'),
-			'budget' => $this->input->post('streetName'),
-			'projectTypeID' => $this->input->post('country'),
+			'title' => $this->input->post('projectTitle'),
+            'managerID' => ($accountID),
+			'startDate' => $this->input->post('startDate'),
+			'endDate' => $this->input->post('endDate'),
+			'budget' => $this->input->post('projectBudget'),
+			'projectTypeID' => $this->input->post('projectType')
 		);
 		
 		
-	$this->db->insert('address', $addressData);
-	$addressID = $this->db->insert_id();
-	
-	echo $accountID. ' '. $addressID;
-		
-	$profileData = array(
-			'accountID' => ($accountID),
-         'firstname' => $this->input->post('fname'),
-         'lastname' => $this->input->post('sname'),
-			'addressID' => ($addressID),
-         'dob' => $this->input->post('dob'),
-         'religion' => $this->input->post('religion'),
-         'locationFlexibility' => $this->input->post('locationFlex') == "able" ? 1 : 0
-    );
-    
-    $this->db->insert('person', $profileData);
-	
-	$info = array(
-		'profile' => $profileData, 
-		'address' => $addressData
-	);
-	
-	
-	return $info;
-			
-			
-			
-	
-	/* 
-		1. CREATE LOGIN PAGE
-		2. CREATE SESSIONS WHEN LOGGED IN
-		3. Get the username of the account in session.
-		4. when posting... SQL query: insert into address the following where username in session is...
-	
-	
-		 Below is the following data from form table that will be posted to address table in db
-		'country' => $this->input->post('country'),
-		'city' => $this->input->post('city'),
-		'postcode' => $this->input->post('postcode'),
-		'streetName' => $this->input->post('streetName'),
-		'buildingNumber' => $this->input->post('buildingNumber'),
-	);
-	
-	$a = $this->db->insert('person', $profileData);
-	$b = $this->db->insert('address', $addressData);
-	
-	// ADDRESS WONT LINK TO PERSON ACCOUNT (*************************************
-	
-	$test = array(
-		$a,
-		$b
-	);
+	$this->db->insert('project', $projectData);
 
-    return $a; */
 }
 
 

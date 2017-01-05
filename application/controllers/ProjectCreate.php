@@ -4,7 +4,7 @@ class ProjectCreate extends CI_Controller {
 	public function __construct()
 			{
 					parent::__construct();
-					$this->load->model('profile_model');
+					$this->load->model('project_model');
 					$this->load->helper('url_helper');
 					$this->load->library('session');
 				
@@ -28,37 +28,37 @@ class ProjectCreate extends CI_Controller {
 			return true;
 	}
 
-	public function profile(){
+	public function projectCreate(){
 		if($this->check_restricted() == false) {return;};
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		
 		$data['title'] = 'Edit profile';
 		
-		$this->form_validation->set_rules('pname', 'Project Name', 'required');
-		$this->form_validation->set_rules('pemail', 'Project Email', 'required');
-		$this->form_validation->set_rules('ptype', 'Project Type', 'required');
+		$this->form_validation->set_rules('projectTitle', 'Project Title', 'required');
+//		$this->form_validation->set_rules('projectEmail', 'Project Email', 'required');
+		$this->form_validation->set_rules('projectType', 'Project Type', 'required');
 		
 		$this->form_validation->set_rules('startDate', 'Start Date', 'required');
 		$this->form_validation->set_rules('endDate', 'End Date', 'required');
 		
 		
-		$this->form_validation->set_rules('pLocation', 'Project Location', 'required');
-		$this->form_validation->set_rules('pDesc', 'Project Description', 'required');
-		$this->form_validation->set_rules('budget', 'Budget', 'required');
+//		$this->form_validation->set_rules('pLocation', 'Project Location', 'required');
+//		$this->form_validation->set_rules('pDesc', 'Project Description', 'required');
+		$this->form_validation->set_rules('projectBudget', 'Budget', 'required');
 
-		$data['info'] =  $this->project_model->load_profile();
+		$data['skills'] =  $this->project_model->load_skills();
 		
 		if ($this->form_validation->run() === FALSE)
 		{
 			$this->load->view('templates/header', $data);
-			$this->load->view('pages/profile_edit');
+			$this->load->view('pages/project/createProject', $data);
 			$this->load->view('templates/footer');
 
 		}
 		else
 		{
-			$this->profile_model->set_profile();
+			$this->project_model->set_project();
 			$this->load->view('pages/success', $data);
 
 		} 
