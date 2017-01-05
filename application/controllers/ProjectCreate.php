@@ -41,11 +41,16 @@ class ProjectCreate extends CI_Controller {
 		
 		$this->form_validation->set_rules('startDate', 'Start Date', 'required');
 		$this->form_validation->set_rules('endDate', 'End Date', 'required');
-		
+		$this->form_validation->set_rules('projectBudget', 'Budget', 'required');
+
 		
 //		$this->form_validation->set_rules('pLocation', 'Project Location', 'required');
 //		$this->form_validation->set_rules('pDesc', 'Project Description', 'required');
-		$this->form_validation->set_rules('projectBudget', 'Budget', 'required');
+		
+		$this->form_validation->set_rules('skillID[]', 'Skills', 'required');
+		$this->form_validation->set_rules('skillLevel[]', 'Skill Levels', 'required');
+		$this->form_validation->set_rules('skillNumPeople[]', 'Number of People ', 'required');
+
 
 		$data['skills'] =  $this->project_model->load_skills();
 		

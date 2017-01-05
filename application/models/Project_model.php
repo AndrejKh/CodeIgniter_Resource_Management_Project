@@ -183,6 +183,22 @@ public function set_project()
 		
 		
 	$this->db->insert('project', $projectData);
+	$projectID = $this->db->insert_id();
+	$skillIDs = $this->input->post("skillID");
+	$skillLevels = $this->input->post("skillLevel");
+	$skillNumPeoples = $this->input->post("skillNumPeople");
+
+	//projectReq	skillID	skillLevel	numPeople
+	for ($i=0; $i < count($skillIDs); $i++) {
+         $skillsData[] = array(
+			'projectReq'=>$projectID,
+			'skillID'=>$skillIDs[$i],
+			'skillLevel'=>$skillLevels[$i],
+			'numPeople'=>$skillNumPeoples[$i],
+         ); // store values in array  
+	}
+	$this->db->insert_batch('project_skills_required', $skillsData);
+
 
 }
 

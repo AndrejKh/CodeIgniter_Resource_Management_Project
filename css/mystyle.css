@@ -8,6 +8,7 @@ h5 {
     text-align: center;
 }
 
+
 .mycontent-left {
   margin-left: 15px;
   padding-right: 30px;
@@ -56,6 +57,7 @@ box-shadow: 5px 5px 5px 4px #8CC9FF;
     padding-left: 15px;
     margin-left: 5px;
     margin-right: 5px;
+    padding-bottom: 10px;
 }
 
 .col-sm-4{
@@ -67,14 +69,25 @@ box-shadow: 5px 5px 5px 4px #8CC9FF;
     padding-right: 15px;
     margin-right: 15px;
 }
-
+.createProject div{ color:blue; }
+ 
 .createProject{
     
   margin: auto;
   width: 75%;
   margin-left: 25%;
-  background: rgb(177, 190, 201)
+  background: #fff;
 
+}
+
+.noPadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+#projectSkills .selected {
+	background: #007;
+	color:#fff;
 }
 
 .btn{
@@ -115,10 +128,7 @@ min-width: 200px;
 /*nav css*/
 /*nav css close*/
 
-
-
-
-.page-header {background:#ccc;margin:0;}
+.form-inline .form-control{width: 100% !important; }  
 
 .profile-head { width:100%;background-color: rgb(151, 177, 219);float: left;padding: 15px 5px;}
 .profile-head img { height:150px; width:150px; margin:0 auto; border:5px solid #fff; border-radius:5px;}
@@ -165,9 +175,9 @@ float:left;}
 .selectpicker option { color:#000 !important;}
 .selectpicker option:first-child { color:#99999c;}
 .input-group { width:100%;}
-.uplod-picture {width: 100%; background-color:#;color: #fff; padding:20px 10px;margin-bottom:10px;}
+.uplod-picture {width: 100%;color: #fff; padding:20px 10px;margin-bottom:10px;}
 .uplod-file {position: relative;overflow: hidden;color: #fff;background-color: rgb(0, 4, 51);border: 0px solid #a02e09;border-radius: 0px;
- transition:all ease 0.3s;margin: 5px;}
+ transition:all ease 0.3s;margin: 45px 30px 0px 35px;}
 .uplod-file input[type=file] {position: absolute;top: 0;right: 0;min-width: 100%;min-height: 100%;font-size: 100px;text-align: right;
 filter: alpha(opacity=0);opacity: 0;outline: none;background: white;cursor: inherit;display: block;}
 .uplod-file:hover, .uplod-file:focus {color: #fff;background-color:rgb(255, 102, 0);}
