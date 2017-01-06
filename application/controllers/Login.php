@@ -50,7 +50,7 @@ public function login()
 
 		$logged_in = $this->session->logged_in;
 		if($logged_in){
-			redirect('viewprofile');
+			redirect('view_profile');
 		}else {
 			$this->form_validation->set_rules('username', 'username', 'required');
 			$this->form_validation->set_rules('password', 'password', 'required');
