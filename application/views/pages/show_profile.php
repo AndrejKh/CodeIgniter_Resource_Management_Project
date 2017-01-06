@@ -1,3 +1,4 @@
+
 <body>
 
 <!-- start of profile well-->
@@ -8,19 +9,23 @@
 <div class="profile-head">
 <div class="col-md- col-sm-4 col-xs-12">
 <img src="http://www.newlifefamilychiropractic.net/wp-content/uploads/2014/07/300x300.gif" class="img-responsive" />
-<h6>Jenifer Smith</h6>
+<h6>Jenifer Smith  - </h6>
 </div><!--col-md-4 col-sm-4 col-xs-12 close-->
 
 
+
 <div class="col-md-5 col-sm-5 col-xs-12">
-<h5 id="h01">Super Mario</h5>
+<h5 id="h01"> <?php echo $info[0]['firstname']; echo " ".  $info[0]['lastname']; ?>  </h5>
 <p id="p01"> Web Designer / Develpor </p>
 <ul>
 <li><span class="glyphicon glyphicon-briefcase"></span> 5 years</li>
 <li><span class="glyphicon glyphicon-map-marker"></span> Italy</li>
-<li><span class="glyphicon glyphicon-home"></span> 555 street 9 ,toedo 43606 U.S.A.</li>
+<li><span class="glyphicon glyphicon-home"></span> 
+<?php echo $info[0]['buldingNumber'];echo " ".  $info[0]['streetName'];echo " ".  $info[0]['postcode'];echo " ".  $info[0]['city'];echo " ".  $info[0]['country']; ?>
+
+</li>
 <li><span class="glyphicon glyphicon-phone"></span> <a href="#" title="call">(+021) 956 789123</a></li>
-<li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="mail">jenifer123@gmail.com</a></li>
+<li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="mail"> <?php echo $info[0]['email'];?></a></li>
 
 </ul>
 
@@ -140,7 +145,7 @@
     <div class="container">
 <div class="col-sm-11" style="float:left;">
 <div class="hve-pro">
-<p>ITS A ME MARIOO</p>
+<p>ITS A ME <?php echo $info[0]['firstname'];?></p>
 </div><!--hve-pro close-->
 </div><!--col-sm-12 close-->
 <br clear="all" />
@@ -157,19 +162,19 @@
       <tbody>
      <tr>      
         <td>Firstname</td>
-        <td>: jenifer</td> 
+        <td>: <?php echo $info[0]['firstname'];?></td> 
      </tr>
      <tr>    
         <td>Lastname</td>
-        <td>: smith</td>       
+        <td>: <?php echo $info[0]['lastname'];?></td>       
      </tr>
      <tr>    
         <td>Birthday</td>
-        <td>: 10 january 1980</td>       
+        <td>: <?php echo $info[0]['dob'];?></td>       
     </tr>
     <tr>    
         <td>Contury</td>
-        <td>: U.S.A.</td>       
+        <td>: <?php echo $info[0]['country'];?></td>       
     </tr>
     <tr>
         <td>Occupation</td>
@@ -187,8 +192,8 @@
   <table class="table bio-table">
       <tbody>
      <tr>  
-        <td>Emai Id</td>
-        <td>: jenifer123@gmail.com</td> 
+        <td>Email Id</td>
+        <td>: <?php echo $info[0]['email'];?></td> 
      </tr>
      <tr>    
         <td>Mobile</td>

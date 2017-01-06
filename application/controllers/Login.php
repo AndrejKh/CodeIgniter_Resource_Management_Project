@@ -66,7 +66,7 @@ public function login()
 			{
 				$correct =  $this->profile_model->set_login();
 				if($correct) {
-					redirect('viewprofile');
+					redirect('view_profile');
 				}else {
 					$data['retry'] = true;
 					$this->load->view('templates/header', $data);

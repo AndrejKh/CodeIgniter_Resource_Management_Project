@@ -121,13 +121,14 @@ class Page_functions extends CI_Controller {
 		} 
 }
 
-public function viewprofile(){
+public function view_profile(){	
+			
 			$this->check_restricted();
 			$this->load->helper('form');
 			$this->load->library('form_validation');
-		
-			$data['title'] = 'Login to system';
-			$this->profile_model->load_profile();
+			
+			$data['info'] = $this->profile_model->join_load_profile();
+			
 			$this->load->view('templates/profile_header', $data);
 			$this->load->view('pages/show_profile');
 			$this->load->view('templates/footer');
