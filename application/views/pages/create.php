@@ -1,3 +1,30 @@
+<?php 
+
+$string = 'php explode function test';
+
+$array = explode(' ', $string);
+
+echo $array[0].' ';
+echo $array[1].' ';
+echo $array[2].' ';
+echo $array[3].' ';
+
+$array_two = array();
+
+foreach($array as $a){
+
+		array_push($array_two, $a);
+	
+	}
+	
+foreach($array_two as $aa){
+	
+	echo $aa. ' ';
+	
+	}
+
+
+?>
 <?php echo validation_errors(); ?>
 
 <?php echo form_open('create'); ?>

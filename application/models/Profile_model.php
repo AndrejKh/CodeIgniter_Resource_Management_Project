@@ -139,7 +139,7 @@ public function set_account()
 			return;
 		}
 		
-		/*
+		
 		$personData = $query->result()[0];
 		$addressID = $query->result()[0]->addressID;
 		
@@ -153,13 +153,13 @@ public function set_account()
 		if($query-> num_rows() != 1){
 			return;
 		}
-		/*$addressData = $query->result()[0];
+		$addressData = $query->result()[0];
 		
 		$info =  array(
 			'profile' => $personData, 
 			'address' => $addressData
 		);
-		*/
+		
 		
 		
 		return $query->result_array();
@@ -304,6 +304,149 @@ public function set_profile()
 }
 
 
+public function profile_search($option, $search){
 	
-}
 
+	$option1 = (string)$option;
+	$this->db->select('*');
+	$this->db->	from('person');
+	$this->db->join('user_account', 'person.accountID = user_account.accountID');
+	$this->db->join('address', 'person.addressID = address.addressID');
+	
+	$this->db-> like($option1,$search);
+	
+	$query = $this->db->get()->result();
+	
+	
+	return $query;
+	
+	
+/*
+	$split_search = explode(' ', $search);	
+
+	if(empty($split_search)){  return; }
+	
+	foreach($split_search as $search){
+	$query = $this->db-> like('firstname',$search)->
+	or_like('lastname',$search)->
+	or_like('email',$search)->
+	or_like('username',$search)->
+	or_like('city',$search)->
+	or_like('streetName',$search)->
+	or_like('buldingNumber', $search)->
+	get()->result();
+	
+	if($query){
+	
+		
+		
+	}
+		
+	}
+	
+	
+	return $query;
+	
+	
+	*/
+	
+	/*$split_search_query = explode(' ', $search);
+	
+	$result_indexes = array();
+	
+	if(!empty($split_search_query)){
+		foreach($split_search_query as $s) {
+		
+		
+		$this->db-> like('firstname',$search),
+		$this->db-> or_like('lastname',$search),
+		$this->db-> or_like('email',$search),
+		$this->db-> or_like('username',$search),
+		$this->db-> or_like('city',$search),
+		$this->db-> or_like('streetName',$search),
+		$this->db-> or_like('buldingNumber', $search)
+		
+		array_push($result_indexes, $);	
+	
+		}
+	}
+	
+	if($fields){
+		
+		$result = $query;
+		
+	}
+	
+	
+	$this->db->limit(1);
+	
+	
+	
+	if($query->numRows() >5){
+		return;
+		}
+		
+	
+	
+	$split_search_query = explode(' ', $search);
+	
+	
+	return $query;
+	
+	
+	*/
+	
+	
+	/*result = $this->db->get();
+	
+	if($result-> num_rows() >10){
+			return;
+		}
+	
+	$split_query = explode(' ', $search);
+	$keywords = array();
+	
+	$indexes = array();
+
+	foreach($split_query as $a){
+		array_push($keywords, $a);
+	}
+	
+	
+	foreach($result as $row){
+		foreach($keywords as $key=>$value){
+		foreach($fields as $field_key=>$field_value){
+			if($value = $field_value){
+				array_push($indexes,$field_key);//return the row ???
+				}
+			}
+	}
+	}
+	
+
+	
+	/*foreach($keywords as $key){
+		foreach($fields as $field){
+			if($key = $field){
+				
+				array_push($indexes, index($query->row())); //return the row ???
+				
+				}
+			}
+	}*/
+	
+	/*eh = array(array_count_values($indexes));
+	
+	foreach($meh as $m){
+			
+		$result = max($m);
+		$result = $this->b->get($m);
+		}
+		
+
+	return $result;
+	*/
+	
+	}
+
+}

@@ -135,5 +135,28 @@ public function view_profile(){
 		
 		}
 	
+public function search(){
 	
+		$this->check_restricted();
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+	
+		
+		$this->form_validation->set_rules('search', 'Search', 'required');
+		if ($this->form_validation->run() === FALSE){
+			$this->load->view('templates/header');
+			$this->load->view('pages/profile_search');
+			$this->load->view('templates/footer');
+		}
+		else 
+		{
+			$search = $this->input->post('search');
+			$option = $this->input->post('fields');
+			$data['query'] = $this->profile_model->profile_search($option, $search);	
+			
+			$this->load->view('templates/header');
+			$this->load->view('pages/profile_search', $data);
+			$this->load->view('templates/footer');
+		}
+	}
 }

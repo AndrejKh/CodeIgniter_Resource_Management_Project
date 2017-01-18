@@ -1,6 +1,4 @@
 
-<body>
-
 <!-- start of profile well-->
 
 <section>
@@ -9,7 +7,7 @@
 <div class="profile-head">
 <div class="col-md- col-sm-4 col-xs-12">
 <img src="http://www.newlifefamilychiropractic.net/wp-content/uploads/2014/07/300x300.gif" class="img-responsive" />
-<h6>Jenifer Smith  - </h6>
+<h6><?php echo $info[0]['firstname']; echo " ".  $info[0]['lastname']; ?>  </h6>
 </div><!--col-md-4 col-sm-4 col-xs-12 close-->
 
 
