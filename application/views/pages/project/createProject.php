@@ -144,6 +144,7 @@
             <label for="projectBudget">* Budget:</label>
             <input type="text" class="form-control" name="projectBudget">
             <br>
+<!--
             <div class="row">
 				<div class="col-lg-12 noPadding ">
 					<div class="input-group " id="skillSelect">
@@ -172,8 +173,10 @@
 						</div>
 					</div>
 				</div>
+-->
             </div>
             <br>
+<!--
             <div class="">
                 <div class = "panel panel-info">
                     <div class = "panel-heading">
@@ -183,7 +186,6 @@
                     <div class = "panel-body">
                         Please choose the skills required for the project, the level of proficiency needed for each skill and the number of people which will need to hold it.
                         <label for="projectSkills">* Skills Required:</label>
-                <!--            <input type="text" class="form-control" name="projectSkills">-->
                         <ul class="list-group well well-sm pre-scrollable tested" style="max-height: 240px; overflow-y:auto;"  id="projectSkills">
                         </ul>
                         <button id="delSkill" type="button" class="btn btn-primary">Delete</button> 
@@ -192,6 +194,7 @@
                 
               
             </div>
+-->
 
             <br>
             <!--            TAKE SELECTED from below AND INSERT above-->

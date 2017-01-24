@@ -47,12 +47,12 @@ class ProjectCreate extends CI_Controller {
 //		$this->form_validation->set_rules('pLocation', 'Project Location', 'required');
 //		$this->form_validation->set_rules('pDesc', 'Project Description', 'required');
 		
-		$this->form_validation->set_rules('skillID[]', 'Skills', 'required');
-		$this->form_validation->set_rules('skillLevel[]', 'Skill Levels', 'required');
-		$this->form_validation->set_rules('skillNumPeople[]', 'Number of People ', 'required');
+//		$this->form_validation->set_rules('skillID[]', 'Skills', 'required');
+//		$this->form_validation->set_rules('skillLevel[]', 'Skill Levels', 'required');
+//		$this->form_validation->set_rules('skillNumPeople[]', 'Number of People ', 'required');
 
 
-		$data['skills'] =  $this->project_model->load_skills();
+//		$data['skills'] =  $this->project_model->load_skills();
 		
 		if ($this->form_validation->run() === FALSE)
 		{
@@ -63,8 +63,9 @@ class ProjectCreate extends CI_Controller {
 		}
 		else
 		{
-			$data['projectID'] = $this->project_model->set_project();
-			$this->load->redirect('pages/create_tasks', $data);
+			$session_data['projectID'] = $this->project_model->set_project();
+			$this->session->set_userdata("projectID", $session_data);
+			redirect('create_tasks', $data);
 			//change the above to redirect to task setting page once created
 		} 
     }
@@ -74,6 +75,7 @@ public function createTasks(){
 		if($this->check_restricted() == false) {return;};
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		echo "helllo test".$this->session->userdata('projectID')['projectID'];
 
 		//$data['title'] = 'Setting Tasks and Roles';
 		
