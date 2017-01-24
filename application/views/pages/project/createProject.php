@@ -1,4 +1,8 @@
 
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ 
+
 
     <div class="alert alert-info text-center" role="alert">
         <h3>Please fill in the details below</h3>
@@ -18,39 +22,47 @@
             <label for="projectType">Project Type:</label>
             <input type="text" class="form-control" name="projectType">
             <br>
-            <div class='input-group date' id='datetimepicker5'>
+            <div class='input-group date' >
                 <label for="startDate">* Start Date:</label>
                 <div class="form-group">
-                    <div class='input-group date' id='datetimepicker5'>
-                        <input type='date' class="form-control" name="startDate" />
-                        <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
+                    <div class='input-group date' >
+                        <input type='text' class="form-control" id="datepicker" name="startDate" />
                         </span>
                     </div>
                 </div>
                 <label for="endDate">* End Date:</label>
                 <div class="form-group">
-                    <div class='input-group date' id='datetimepicker5'>
-                        <input type='text' class="form-control" name="endDate" />
-                        <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
+                    <div class='input-group date' >
+                        <input type='text' class="form-control" id="datepicker1" name="endDate" />
                         </span>
                     </div>
                 </div>
             </div>
-            <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker5').datetimepicker({
-                    defaultDate: "11/1/2013",
-                    disabledDates: [
-                        moment("12/25/2013"),
-                        new Date(2013, 11 - 1, 21),
-                        "11/22/2013 00:53"
-                    ]
-                });
-            });
-        </script>
+            
+ <script>
+  $( function() 
+  {$( "#datepicker" ).datepicker();
+    $( "#datepicker" ).datepicker( "option", "dateFormat", "dd/mm/yy");
+  } );
+  
+  $( function() {
+    $( "#datepicker1" ).datepicker();
+    $( "#datepicker1" ).datepicker( "option", "dateFormat", "dd/mm/yy");
+    
+  } );
+  
+   </script>
+            
+            
+            
+            
             <label for="projectLocation">* Loaction:</label>
+            
+                        <input type="hidden" id="loca1" name="streetname" value="">
+                        <input type="hidden" id="loca2" name="city" value="">
+                        <input type="hidden" id="loca3" name="country" value="">
+                        <input type="hidden" id="loca4" name="postcode" value="">
+                        
             <div id="map" style="width:40%x;height:400px;background:White">
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7XTpRX5A-G83XNzV_7ORF-OYKfepSD4g&callback=myOptions"></script>
                 <script>
@@ -87,6 +99,26 @@
                                 infowindow.open(map, marker);
                                 var addresslocaion = results[1].formatted_address;
                                 //Note  when extracting the location for database input use the variable "addresslocation"
+                                
+                                
+                                
+                                //Splits up location string and applys the vaules to hidden html inputs
+                                var getcode = addresslocaion.match('[A-Za-z]{1,2}[0-9Rr][0-9A-Za-z]? [0-9][ABD-HJLNP-UW-Zabd-hjlnp-uw-z]{2}');
+                                var postcode = getcode[0];
+                                var removePost = addresslocaion.replace(postcode,'');
+                                var values = removePost.split(',');
+                                var streetname = values[0];
+                                var city = values[1];
+                                var country = values[2];
+                                
+                                 $("#loca1").val(streetname);
+                                 $("#loca2").val(city);
+                                 $("#loca3").val(country);
+                                 $("#loca4").val(postcode);
+                                
+                                
+                                
+                                
                             }
                         });
 

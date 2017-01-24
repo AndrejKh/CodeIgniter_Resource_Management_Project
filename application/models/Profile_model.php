@@ -118,7 +118,6 @@ public function set_account()
 		);
 		*/
 		
-		
 		return $query->result_array();
 		
 		//return $query->result_array();
@@ -129,8 +128,10 @@ public function set_account()
 		$accountID = $this->session->accountID;
 		
 		$this->db-> select('*');
-		$this->db->	from('person');
-		$this->db->	where('accountID',$accountID);
+		$this->db->	from('person','address');
+		$this->db-> join('user_account', 'person.accountID = user_account.accountID');
+		$this->db-> join('address', 'person.addressID = address.addressID');
+		$this->db->	where('person.accountID',$accountID);
 		$this->db-> limit(1);
 		
 		$query = $this->db->get();
@@ -161,8 +162,9 @@ public function set_account()
 		);
 		*/
 		
+		$info = $query->result()[0];
 		
-		return $query->result_array();
+		return $info;
 		
 		//return $query->result_array();
 	}

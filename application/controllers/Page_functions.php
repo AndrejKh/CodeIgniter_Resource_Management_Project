@@ -108,7 +108,7 @@ class Page_functions extends CI_Controller {
 		
 		if ($this->form_validation->run() === FALSE)
 		{
-			$this->load->view('templates/header', $data);
+			$this->load->view('templates/profile_header', $data);
 			$this->load->view('pages/profile_edit');
 			$this->load->view('templates/footer');
 

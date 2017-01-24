@@ -59,6 +59,8 @@ $route['successful_login'] = 'login/successful_login';
 $route['create'] = 'page_functions/create';
 $route['profile'] = 'page_functions/profile';
 $route['create_project'] = 'ProjectCreate/projectCreate';
+$route['create_tasks'] = 'ProjectCreate/createTasks';
+
 $route['view_profile'] = 'page_functions/view_profile';
 $route['logout'] = 'login/logout';
 $route['(:any)'] = 'page_functions/view/$1';
