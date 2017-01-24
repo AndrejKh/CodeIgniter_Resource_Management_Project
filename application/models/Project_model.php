@@ -217,7 +217,7 @@ public function set_tasks()
 			'projectID'=>$projectID,
 			'title' => 	$task['title'],			//$this->input->post('task[][title]'),
 			'startDate' => 	$task['startDate'],	// $this->input->post('task[][startDate]'),
-			'endDate' => $task['endDate'] 		//$this->input->post('task[][endDate]'),
+			'endDate' => $task['endDate'] 		//$this->i nput->post('task[][endDate]'),
 		);
 		$this->db->insert_batch('project_tasks', $taskData);
 		$taskID = $this->db->insert_id();
