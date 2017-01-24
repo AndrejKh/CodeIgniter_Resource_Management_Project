@@ -39,7 +39,7 @@
 </head> 
 <body onload="if(<?php echo $this->session->logged_in ?>){DisplaySessionTimeout();}">
   <div class="buttons"></div>
-    <button type="button" onclick="location.href='http://google.com';" class="btn btn-info">
+    <button type="button" onclick="location.href='<?php  echo base_url()."index.php/profile"?>';" class="btn btn-info">
       <span class="glyphicon glyphicon-user"></span> Profile
     </button>
     <button type="button" onclick="location.href='https://preview.c9users.io/mvv1/stage2/calendar.html?_c9_id=livepreview1&_c9_host=https://ide.c9.io';" class="btn btn-info ">
