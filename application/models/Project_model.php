@@ -202,7 +202,78 @@ public function set_project()
 
 }
 
-
+public function search_algorithm(){
+	/*
+		1. take in tasks. For each task, query the database for someone with the skills required to do the task.
+		2. return a person appropriate to the task.
+		3. Insert into the database the person associated to the task and project.
+	*/
+	
+	//get project ID
+	//get roles in project
+	$projectID = $this->session->userdata('projectID');	
+	
+	$this->db-> select('taskID');
+	$this->db-> from('project_tasks');
+	$this->db-> where('projectID', $projectID);
+	$tasks = $this->db->get()->result_array();
+	
+	$this->db-> select('roleID');
+	$this->db-> from('project_roles');
+	$this->db-> where('taskID', $tasks);
+	$this->db-> where('projectID', $projectID);
+	$roles = $this->db->get()->result_array();
+	
+	$this->db-> select('skillID');
+	$this->db-> from ('role_skills_required');
+	$this->db-> where('roleID', $roles);
+	$skill_required = $this->db->get()->result_array();
+	
+	
+	foreach($tasks as $s){
+		foreach($roles as $r){
+	
+			foreach($skill_required as $skill){
+			
+				$employee_assigned = array();
+				
+				$roleID = $this->db->get($r->get('roleID'));
+				$num_people = $this->db->get($r->get('numPeople'));
+				$skillID = $this->db->get($r->get('skillID'));
+		
+				$this->db-> select('firstname', 'lastname', 'email');
+				$this->db->	from('person', 'user_account');
+				$this->db-> join('user_account', 'person.accountID = user_account.accountID');
+				$this->db-> join('address', 'person.addressID = address.addressID');
+				$this->db-> join('user_skills', 'person.accountID = user_skills.accountID');
+				$this->db->	where('user_skills.skillID',$skillID); //where each element of skills required array 	
+				$this->db->	where('person.availability','0');
+			
+				$this->db-> limit(1);
+				
+				$accountID =$this->db->get('accountID');
+			
+				if($accountID->num_rows() < 1){
+					echo 'No match of person that fulfills the roles skill requirements!';
+					return;
+				}
+			
+				$employee_assignment = array(
+					'accountID' => $this->input->post($accountID),
+		            'roleID' => $this->input->post($roleID)
+				);
+		
+				foreach($employee_assignment as $ea){ //get the employees in the 
+					$this->db-> insert('employee_assignment', $ea);
+				}
+				
+			}
+		}
+	}
+		
+	}
 	
 }
+
+
 
