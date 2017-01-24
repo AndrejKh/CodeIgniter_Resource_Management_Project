@@ -50,7 +50,12 @@ public function login()
 
 		$logged_in = $this->session->logged_in;
 		if($logged_in){
-			redirect('view_profile');
+			$profileExists = $this->profile_model->check_for_profile();
+			echo "profile logged ".$profileExists;
+			if($profileExists == 1)
+				redirect('view_profile');
+			 else
+				redirect('profile');
 		}else {
 			$this->form_validation->set_rules('username', 'username', 'required');
 			$this->form_validation->set_rules('password', 'password', 'required');
@@ -66,7 +71,11 @@ public function login()
 			{
 				$correct =  $this->profile_model->set_login();
 				if($correct) {
-					redirect('view_profile');
+					$profileExists = $this->profile_model->check_for_profile();
+					if($profileExists == 1)
+						redirect('view_profile');
+					 else
+						redirect('profile');
 				}else {
 					$data['retry'] = true;
 					$this->load->view('templates/header', $data);
