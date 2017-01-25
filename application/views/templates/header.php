@@ -46,8 +46,7 @@
 			</div>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="active"><a href="view_profile">Home</a></li>
-				<li><a href="#">Company</a></li>
-				<li><a href="#">Blog</a></li>
+				<li><a href="http://askooner1996.wixsite.com/planwise">Company</a></li>
 			</ul>
 		</div>
 	</nav>
