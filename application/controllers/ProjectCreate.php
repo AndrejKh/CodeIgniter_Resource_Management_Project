@@ -155,7 +155,8 @@ public function createTasks(){
 		else
 		{
 			$this->project_model->set_tasks();
-			$this->load->view('pages/success', $data);
+			//$this->load->view('pages/success', $data);
+			redirect('project_allocation');
 			//change the above to redirect to task setting page once created
 		} 
     }
@@ -165,7 +166,7 @@ public function createTasks(){
     	if($this->check_restricted() == false) {return;};
     	$this->load->helper('form');
     	
-		$data['allocation'] = $this->project_model->search_algorithm();
+		$data['query'] = $this->project_model->search_algorithm();
     	
     	$this->load->view('templates/profile_header');
 		$this->load->view('pages/project/project_allocation', $data);

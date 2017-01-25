@@ -272,8 +272,9 @@ public function search_algorithm(){
 	$this->db->where('project.projectID', '1');
 	$projectID = $this->db->get()->result();
 	*/
-	$projectID = 1;
 	
+	/*$projectID = 1;*/
+	$projectID = ( $this->session->projectID);
 	//print_r($projectID);
 	
 	$this->db-> select('taskID');
@@ -309,30 +310,26 @@ public function search_algorithm(){
 				//$this->db->	where('person.availability','0');
 				*/
 				
-				$this->db->select('accountID');
+				$this->db->select('user_account.accountID');
 				$this->db->from('user_account');
 				$this->db->join('user_skills', 'user_skills.accountID = user_account.accountID');
 				$this->db->where('user_skills.skillID', $skill['skillID']);
 				$this->db-> limit(1);
 				
-				$accountID = $this->db->get()->result_array();
-				
-				print_r($r);
+				$accountID = $this->db->get()->row();
 			
 				if(count($accountID) < 1){
-					print_r($accountID);
 					echo 'No match of person that fulfills the roles skill requirements!';
 					return;
 				}
 			
-				$employee_assignment[] = array(
-					'accountID' => $this->input->post($accountID),
-		            'roleID' => $this->input->post($r)
+				$employee_assignment = array(
+					'accountID' => $accountID->accountID,
+		            'roleID' => $r['roleID']
 				);
+
 				
-				print_r($employee_assignment);
-				
-				$this->db->insert_batch('employee_assignment', $employee_assignment);
+				$this->db->insert('employee_assignment', $employee_assignment);
 				
 			}
 		}
@@ -351,37 +348,45 @@ public function search_algorithm(){
 	$this->db->from ('project_tasks');
 	$this->db->where ('projectID', $projectID);
 	$tasks = $this->db->get()->result_array();
-	
-	
-	print_r($tasks);
+
+	$assigned_data[] = array();
 	foreach($tasks as $t){
 		
 		$this->db-> select('roleID');
 		$this->db-> from('project_roles');
 		$this->db-> where('taskID', $t['taskID']);
-		$roles = $this->db->get()->result();
+		$roles = $this->db->get()->result_array();
 		
 		foreach($roles as $r){
 				$this->db->select('accountID');
 				$this->db->from('employee_assignment');
 				$this->db->where('roleID', $r['roleID']);
-				$accounts_assigned = $this->db->get()->result();
-				
+				$accounts_assigned = $this->db->get()->result_array();
+
 				foreach($accounts_assigned as $accounts){
-					$this->db->select('username', 'accountID', 'email', 'firstname', 'lastname');
+
+					$this->db->select('*');
 					$this->db->from ('user_account', 'person');
-					$this->db->join('user_account', 'user_account.accountID = person.accountID');
-					$this->db->where('accountID', $accounts['accountID']);
-					$query = $this->db->get()->result();
-					
-					return $query;
+					$this->db->join('person', 'user_account.accountID = person.accountID');
+					$this->db->where('person.accountID', $accounts['accountID']);
+					$query = $this->db->get()->result_array();
+					echo "hello";
+					$assigned_data[] = $query;
+					/*'username', 'person.accountID', 'email', 'firstname', 'lastname'
+					$this->db->select('user_account.accountID');
+					$this->db->from('user_account');
+					$this->db->join('user_skills', 'user_skills.accountID = user_account.accountID');
+					$this->db->where('user_skills.skillID', $skill['skillID']);
+					$query = $this->db-> limit(1);
+					$query = $this->db->get()->result();*/
+
 					
 					}
-			
+
 			}		
-		
+
 		}
-	
+				return $assigned_data;
 	
 	
 	/*$this->db->select('*');
