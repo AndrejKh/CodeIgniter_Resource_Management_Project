@@ -159,6 +159,19 @@ public function createTasks(){
 			//change the above to redirect to task setting page once created
 		} 
     }
+    
+ public function allocation(){
+    	
+    	if($this->check_restricted() == false) {return;};
+    	$this->load->helper('form');
+    	
+		$data['allocation'] = $this->project_model->search_algorithm();
+    	
+    	$this->load->view('templates/profile_header');
+		$this->load->view('pages/project/project_allocation', $data);
+		$this->load->view('templates/footer');
+    	
+    }
 
 }
 ?>
