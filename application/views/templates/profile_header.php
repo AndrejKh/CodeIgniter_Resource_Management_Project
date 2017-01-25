@@ -45,7 +45,7 @@
     <button type="button" onclick="location.href='<?php  echo base_url()."index.php/profile"?>';" class="btn btn-info">
       <span class="glyphicon glyphicon-user"></span> Profile
     </button>
-    <button type="button" onclick="#" class="btn btn-info ">
+    <button type="button" onclick="" class="btn btn-info ">
       <span class="glyphicon glyphicon-calendar"></span> Calendar
     </button>
       </div>
