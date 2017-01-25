@@ -272,8 +272,9 @@ public function search_algorithm(){
 	$this->db->where('project.projectID', '1');
 	$projectID = $this->db->get()->result();
 	*/
-	$projectID = 1;
 	
+	/*$projectID = 1;*/
+	$projectID = ( $this->session->projectID);
 	//print_r($projectID);
 	
 	$this->db-> select('taskID');
@@ -348,7 +349,7 @@ public function search_algorithm(){
 	$this->db->where ('projectID', $projectID);
 	$tasks = $this->db->get()->result_array();
 
-
+	$assigned_data[] = array();
 	foreach($tasks as $t){
 		
 		$this->db-> select('roleID');
@@ -361,29 +362,31 @@ public function search_algorithm(){
 				$this->db->from('employee_assignment');
 				$this->db->where('roleID', $r['roleID']);
 				$accounts_assigned = $this->db->get()->result_array();
-				
+
 				foreach($accounts_assigned as $accounts){
-					
-					/*$this->db->select('username', 'accountID', 'email', 'firstname', 'lastname');
+
+					$this->db->select('*');
 					$this->db->from ('user_account', 'person');
-					$this->db->join('user_account', 'user_account.accountID = person.accountID');
-					$this->db->where('accountID', $accounts['accountID']);
-					$query = $this->db->get()->result();*/
-					
+					$this->db->join('person', 'user_account.accountID = person.accountID');
+					$this->db->where('person.accountID', $accounts['accountID']);
+					$query = $this->db->get()->result_array();
+					echo "hello";
+					$assigned_data[] = $query;
+					/*'username', 'person.accountID', 'email', 'firstname', 'lastname'
 					$this->db->select('user_account.accountID');
 					$this->db->from('user_account');
 					$this->db->join('user_skills', 'user_skills.accountID = user_account.accountID');
 					$this->db->where('user_skills.skillID', $skill['skillID']);
 					$query = $this->db-> limit(1);
-					
-					return $query;
+					$query = $this->db->get()->result();*/
+
 					
 					}
-			
+
 			}		
-		
+
 		}
-	
+				return $assigned_data;
 	
 	
 	/*$this->db->select('*');
