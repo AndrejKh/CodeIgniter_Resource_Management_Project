@@ -15,7 +15,7 @@
 
 	<!-- Text input-->
 	<div class="form-group">
-	  <label class="col-md-4 control-label" for="fname">First Name: </label>  
+	  <label class="col-md-4 control-label" for="fname">First Name: </label>
 	  <div class="col-md-5">
 	  <input id="fname" name="fname" type="text" placeholder="Joe" class="form-control input-md" required="" <?php if(isset($info)) { 	echo "value=".$info->firstname; }   ?>  > 
 	  <span class="help-block">Enter your first name above</span>  

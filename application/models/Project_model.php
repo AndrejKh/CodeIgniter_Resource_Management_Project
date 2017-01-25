@@ -211,7 +211,8 @@ public function set_tasks()
     
    $accountID = $this->session->accountID;
 	$tasks = $this->input->post('task');
-	$projectID = 1;
+	$projectID = ( $this->session->projectID);
+	echo $projectID;
 		//taskID 	projectID 	title 	startDate 	endDate
 	foreach($tasks as $id4 => $task){
 		$taskData[] = array(
@@ -237,14 +238,18 @@ public function set_tasks()
 			if(isset($skillData))
 				unset($skillData);
 			$skills = $this->input->post('task[' . $id4 . '][role]['.$id2.'][skill]');
+			//~ $skillData[] = array();
 			foreach($skills as $id3 => $skill){
 				$skillData[] = array(
-					'assignmentID' => $roleID,
+					'roleID' => $roleID,
 					'skillID' => 	$skill['skillID'],			//$this->input->post('task[][title]'),
 					'skillLevel' => 	$skill['skillLevel'],	// $this->input->post('task[][startDate]'),
 				);
-				$this->db->insert_batch('role_skills_required', $skillData);
 			}
+			echo "<br> skills entry <br>";
+			print_r ($skillData);
+			$this->db->insert_batch('role_skills_required', $skillData);
+
 		}
 	}
 

@@ -63,7 +63,7 @@ class ProjectCreate extends CI_Controller {
 		}
 		else
 		{
-			$session_data['projectID'] = $this->project_model->set_project();
+			$session_data= $this->project_model->set_project();
 			$this->session->set_userdata("projectID", $session_data);
 			redirect('create_tasks', $data);
 			//change the above to redirect to task setting page once created
@@ -75,7 +75,7 @@ public function createTasks(){
 		if($this->check_restricted() == false) {return;};
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		echo "helllo test".$this->session->userdata('projectID')['projectID'];
+		//~ echo $this->session->userdata('projectID');
 
 		//$data['title'] = 'Setting Tasks and Roles';
 		
@@ -147,7 +147,7 @@ public function createTasks(){
 		
 			$data['skills'] =  $this->project_model->load_skills();
 		
-			$this->load->view('templates/profile_header', $data);
+			$this->load->view('templates/header', $data);
 			$this->load->view('pages/project/createTasks', $data);
 			$this->load->view('templates/footer');
 

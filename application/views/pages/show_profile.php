@@ -42,7 +42,7 @@
 <section id="cd-timeline" class="cd-container">
 		<div class="cd-timeline-block">
 			<div class="cd-timeline-img cd-picture">
-				<img src="img/cd-icon-picture.svg" alt="Picture">
+				<img src="<?php echo base_url() ?>/img/cd-icon-picture.svg" alt="Picture">
 			</div> <!-- cd-timeline-img -->
 
 			<div class="cd-timeline-content">
@@ -55,7 +55,7 @@
 
 		<div class="cd-timeline-block">
 			<div class="cd-timeline-img cd-movie">
-				<img src="img/cd-icon-movie.svg" alt="Movie">
+				<img src="<?php echo base_url() ?>/img/cd-icon-movie.svg" alt="Movie">
 			</div> <!-- cd-timeline-img -->
 
 			<div class="cd-timeline-content">
@@ -68,7 +68,7 @@
 
 		<div class="cd-timeline-block">
 			<div class="cd-timeline-img cd-picture">
-				<img src="img/cd-icon-picture.svg" alt="Picture">
+				<img src="<?php echo base_url() ?>/img/cd-icon-picture.svg" alt="Picture">
 			</div> <!-- cd-timeline-img -->
 
 			<div class="cd-timeline-content">
@@ -81,7 +81,7 @@
 
 		<div class="cd-timeline-block">
 			<div class="cd-timeline-img cd-location">
-				<img src="img/cd-icon-location.svg" alt="Location">
+				<img src="<?php echo base_url() ?>/img/cd-icon-location.svg" alt="Location">
 			</div> <!-- cd-timeline-img -->
 
 			<div class="cd-timeline-content">
@@ -94,7 +94,7 @@
 
 		<div class="cd-timeline-block">
 			<div class="cd-timeline-img cd-location">
-				<img src="img/cd-icon-location.svg" alt="Location">
+				<img src="<?php echo base_url() ?>/img/cd-icon-location.svg" alt="Location">
 			</div> <!-- cd-timeline-img -->
 
 			<div class="cd-timeline-content">
@@ -107,7 +107,7 @@
 
 		<div class="cd-timeline-block">
 			<div class="cd-timeline-img cd-movie">
-				<img src="img/cd-icon-movie.svg" alt="Movie">
+				<img src="<?php echo base_url() ?>/img/cd-icon-movie.svg" alt="Movie">
 			</div> <!-- cd-timeline-img -->
 
 			<div class="cd-timeline-content">
@@ -118,7 +118,7 @@
 		</div> <!-- cd-timeline-block -->
 	</section> <!-- cd-timeline -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="js/main.js"></script> <!-- Resource jQuery -->
+<script src="<?php echo base_url()?>/js/main.js"></script> <!-- Main JS -->
 
 <!--start of profile information-->
 
@@ -243,7 +243,7 @@
   <label class="col-md-10 control-label">First Name</label>  
   <div class="col-md-12 inputGroupContainer">
   <div class="input-group">
-  <input  name="first_name" placeholder="First Name" class="form-control"  type="text">
+ <input name="first_name" placeholder="Last Name" class="form-control"  type="text">
     </div>
   </div>
 </div>
@@ -371,7 +371,7 @@
     <select name="state" class="form-control selectpicker" >
       <option value=" " >your Salary expectation</option>
       <option>50 thousand</option>
-      <option>30thousand</option>
+      <option>30 thousand</option>
     </select>
   </div>
 </div>
@@ -439,8 +439,8 @@
 <!-- Button -->
 <div class="form-group col-md-10">
   <div class="col-md-6">
-    <button type="submit" class="btn btn-warning submit-button" >Save</button>
-    <button type="submit" class="btn btn-warning submit-button" >Cancel</button>
+    <button type="submit" class="btn submit-button" >Save</button>
+    <button type="submit" class="btn submit-button" >Cancel</button>
 
   </div>
 </div>
