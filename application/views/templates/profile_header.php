@@ -9,8 +9,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="<?php echo base_url()?>/css/reset.css"> <!-- CSS reset -->
-	<link rel="stylesheet" href="<?php echo base_url()?>/css/style.css"> <!-- Resource style -->
+		<link rel="stylesheet" href="<?php echo base_url()?>/css/style.css"> <!-- Resource style -->
+	<link rel="stylesheet" href="<?php echo base_url()?>/css/style.scss"> <!-- Resource style -->
 	<script src="<?php echo base_url()?>/js/modernizr.js"></script> <!-- Modernizr -->
+	<script src="<?php echo base_url()?>/js/main.js"></script> <!-- Main JS -->
+
 	<title><?php echo $title; ?></title>
 	<script type="text/javascript">
 		var sessionTimeout = <?php echo $this->config->item("sess_expiration"); ?> ; 
