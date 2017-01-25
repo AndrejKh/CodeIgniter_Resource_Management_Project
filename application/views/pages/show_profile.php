@@ -243,7 +243,7 @@
   <label class="col-md-10 control-label">First Name</label>  
   <div class="col-md-12 inputGroupContainer">
   <div class="input-group">
-  <input id="fname" name="fname" type="text" placeholder="Joe" class="form-control input-md" required="" <?php if(isset($info)) { 	echo "value=".$info['profile']->firstname; }   ?>  >
+ <input name="first_name" placeholder="Last Name" class="form-control"  type="text">
     </div>
   </div>
 </div>
