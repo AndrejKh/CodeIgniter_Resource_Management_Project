@@ -59,6 +59,7 @@ $route['successful_login'] = 'login/successful_login';
 $route['create'] = 'page_functions/create';
 $route['profile'] = 'page_functions/profile';
 $route['search'] = 'page_functions/search';
+$route['project_allocation'] = 'ProjectCreate/allocation';
 $route['create_project'] = 'ProjectCreate/projectCreate';
 $route['create_tasks'] = 'ProjectCreate/createTasks';
 
