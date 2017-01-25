@@ -44,10 +44,7 @@ public function set_login()
 	}else{
 		return FALSE;			
 	}
-
-
-    $this->load->helper('url');
-   
+  
 
 }
 
@@ -78,6 +75,22 @@ public function set_account()
 
     return $a;
 }
+
+	public function check_for_profile(){
+		$accountID = $this->session->accountID;
+		
+		$this->db-> select('*');
+		$this->db->	from('person');
+		$this->db->	where('person.accountID',$accountID);
+		$this->db-> limit(1);
+		
+		$query = $this->db->get();
+		
+		if($query-> num_rows() != 1){
+			return 0;
+		}
+		return 1;
+	}
 
 	public function join_load_profile(){
 		
@@ -118,7 +131,6 @@ public function set_account()
 		);
 		*/
 		
-		
 		return $query->result_array();
 		
 		//return $query->result_array();
@@ -128,9 +140,45 @@ public function set_account()
 	public function load_profile(){
 		$accountID = $this->session->accountID;
 		
+		//~ $this->db-> select('*');
+		//~ $this->db->	from('person','address');
+		//~ $this->db-> join('user_account', 'person.accountID = user_account.accountID');
+		//~ $this->db-> join('address', 'person.addressID = address.addressID');
+		//~ $this->db->	where('person.accountID',$accountID);
+		//~ $this->db-> limit(1);
+		
+		//~ $query = $this->db->get();
+		
+		//~ if($query-> num_rows() != 1){
+			//~ return;
+		//~ }
+		
+		
+		//~ $personData = $query->result()[0];
+		//~ $addressID = $query->result()[0]->addressID;
+		
+		//~ $this->db-> select('*');
+		//~ $this->db->	from('address');
+		//~ $this->db->	where('addressID',$addressID);
+		//~ $this->db-> limit(1);
+		
+		//~ $query = $this->db->get();
+		
+		//~ if($query-> num_rows() != 1){
+			//~ return;
+		//~ }
+		//~ $addressData = $query->result()[0];
+		
+		//~ $info =  array(
+			//~ 'profile' => $personData, 
+			//~ 'address' => $addressData
+		//~ );
+		
 		$this->db-> select('*');
-		$this->db->	from('person');
-		$this->db->	where('accountID',$accountID);
+		$this->db->	from('person','address');
+		$this->db-> join('user_account', 'person.accountID = user_account.accountID');
+		$this->db-> join('address', 'person.addressID = address.addressID');
+		$this->db->	where('person.accountID',$accountID);
 		$this->db-> limit(1);
 		
 		$query = $this->db->get();
@@ -139,32 +187,10 @@ public function set_account()
 			return;
 		}
 		
+		$info = $query->result()[0];
 		
-		$personData = $query->result()[0];
-		$addressID = $query->result()[0]->addressID;
+		return $info;
 		
-		$this->db-> select('*');
-		$this->db->	from('address');
-		$this->db->	where('addressID',$addressID);
-		$this->db-> limit(1);
-		
-		$query = $this->db->get();
-		
-		if($query-> num_rows() != 1){
-			return;
-		}
-		$addressData = $query->result()[0];
-		
-		$info =  array(
-			'profile' => $personData, 
-			'address' => $addressData
-		);
-		
-		
-		
-		return $query->result_array();
-		
-		//return $query->result_array();
 	}
 	
 

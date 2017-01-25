@@ -9,8 +9,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="<?php echo base_url()?>/css/reset.css"> <!-- CSS reset -->
-	<link rel="stylesheet" href="<?php echo base_url()?>/css/style.css"> <!-- Resource style -->
+		<link rel="stylesheet" href="<?php echo base_url()?>/css/style.css"> <!-- Resource style -->
+	<link rel="stylesheet" href="<?php echo base_url()?>/css/style.scss"> <!-- Resource style -->
 	<script src="<?php echo base_url()?>/js/modernizr.js"></script> <!-- Modernizr -->
+	<script src="<?php echo base_url()?>/js/main.js"></script> <!-- Main JS -->
+
 	<title><?php echo $title; ?></title>
 	<script type="text/javascript">
 		var sessionTimeout = <?php echo $this->config->item("sess_expiration"); ?> ; 
@@ -39,7 +42,7 @@
 </head> 
 <body onload="if(<?php echo $this->session->logged_in ?>){DisplaySessionTimeout();}">
   <div class="buttons"></div>
-    <button type="button" onclick="location.href='http://google.com';" class="btn btn-info">
+    <button type="button" onclick="location.href='<?php  echo base_url()."index.php/profile"?>';" class="btn btn-info">
       <span class="glyphicon glyphicon-user"></span> Profile
     </button>
     <button type="button" onclick="location.href='https://preview.c9users.io/mvv1/stage2/calendar.html?_c9_id=livepreview1&_c9_host=https://ide.c9.io';" class="btn btn-info ">
