@@ -243,7 +243,7 @@
   <label class="col-md-10 control-label">First Name</label>  
   <div class="col-md-12 inputGroupContainer">
   <div class="input-group">
-  <input  name="first_name" placeholder="First Name" class="form-control"  type="text">
+  <input id="fname" name="fname" type="text" placeholder="Joe" class="form-control input-md" required="" <?php if(isset($info)) { 	echo "value=".$info['profile']->firstname; }   ?>  >
     </div>
   </div>
 </div>
@@ -371,7 +371,7 @@
     <select name="state" class="form-control selectpicker" >
       <option value=" " >your Salary expectation</option>
       <option>50 thousand</option>
-      <option>30thousand</option>
+      <option>30 thousand</option>
     </select>
   </div>
 </div>
@@ -439,8 +439,8 @@
 <!-- Button -->
 <div class="form-group col-md-10">
   <div class="col-md-6">
-    <button type="submit" class="btn btn-warning submit-button" >Save</button>
-    <button type="submit" class="btn btn-warning submit-button" >Cancel</button>
+    <button type="submit" class="btn submit-button" >Save</button>
+    <button type="submit" class="btn submit-button" >Cancel</button>
 
   </div>
 </div>
