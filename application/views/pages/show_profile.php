@@ -131,10 +131,14 @@
               <i class="fa fa-male"></i> Profile
           </a>
       </li>
+      <?php if(!isset($find)) { ?>
+
       <li><a href="#change" role="tab" data-toggle="tab">
           <i class="fa fa-key"></i> Edit Profile
           </a>
       </li>
+      <?php } ?>
+
     </ul><!--nav-tabs close-->
     
     <!-- Tab panes -->
@@ -223,7 +227,7 @@
 </div><!--container close-->
 </div><!--tab-pane close-->
       
-      
+<?php if(!isset($find)) { ?>
 <div class="tab-pane fade" id="change">
 <div class="container fom-main">
 <div class="row">
@@ -449,6 +453,7 @@
 </div><!--row close-->
 </div><!--container close -->          
 </div><!--tab-pane close-->
+<?php } ?>
 </div><!--tab-content close-->
 </div><!--container close-->
 

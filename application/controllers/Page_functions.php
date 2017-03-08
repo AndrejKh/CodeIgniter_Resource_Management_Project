@@ -120,6 +120,21 @@ class Page_functions extends CI_Controller {
 		} 
 }
 
+public function find_profile($usrname ){	
+			
+			$this->check_restricted();
+			$this->load->helper('form');
+			$this->load->library('form_validation');
+			
+			$data['info'] = $this->profile_model->join_find_profile($usrname);
+			$data['find'] = true;
+			
+			$this->load->view('templates/profile_header', $data);
+			$this->load->view('pages/show_profile');
+			$this->load->view('templates/footer');
+		
+		}
+		
 public function view_profile(){	
 			
 			$this->check_restricted();
@@ -133,6 +148,7 @@ public function view_profile(){
 			$this->load->view('templates/footer');
 		
 		}
+	
 	
 public function search(){
 	

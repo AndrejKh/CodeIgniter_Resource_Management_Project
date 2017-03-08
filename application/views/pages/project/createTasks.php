@@ -144,7 +144,7 @@
                      
               for (i = 0; i < j; i++)
               {
-              $('#'+ $("#taskTitle").val() +'_table').append('<div class ="panel panel-danger" name="'+taskNum+'_'+ i +'" id="'+ $("#taskTitle").val() +''+ i +'"><div class="panel-heading">Role '+ (i+1) +'</div>'+
+              $('#'+ $("#taskTitle").val() +'_table').append('<div class ="panel panel-danger" name="'+taskNum+'_'+ i +'" id="'+ $("#taskTitle").val() +''+ i +'"><div class="panel-heading role">Role '+ (i+1) +'</div>'+
                   '<div><input name="task['+ taskNum +'][role]['+ i +'][name]" type="text" placeholder="Role Title" class="form-control input-md"/> </div>'+
                   '<div><input name="task['+ taskNum +'][role]['+ i +'][numPeople]" placeholder="1" type="number" class="form-control input-md"/> </div>'+ 
                   '<div class="row">' +
@@ -185,7 +185,7 @@
                         '<label for="projectSkills">* Skills Required:</label>'+
                         '<ul class="list-group well well-sm pre-scrollable tested" style="max-height: 240px; overflow-y:auto;"  id="projectSkills'+taskNum+'_'+ i +'">'+
                         '</ul>'+
-                        '<button id="delSkill" type="button" onclick="alert(_);" class="btn btn-primary">Delete</button>'+
+                        '<button id="delSkill" type="button" onclick="delskill('+taskNum+','+ i +')" class="btn btn-primary">Delete</button>'+
                    '</div>'+
                ' </div>'+
             '</div></tr>');
@@ -194,7 +194,7 @@
               });
               
 			function addskill(x,y) {
-				$("#projectSkills"+x+"_"+y).append(' <li value="'+ $("#skillName"+x+"_"+y).val() +' " class="list-group-item skill ">' + $("#skillName"+x+"_"+y).val() + '<span class="label label-primary pull-right">' 
+				$("#projectSkills"+x+"_"+y).append(' <li id="pSkills'+x+'_'+y+'_'+$("#projectSkills"+x+"_"+y+" li").length+'" value="'+ $("#skillName"+x+"_"+y).val() +' " onClick="selectSkill('+x+','+y+','+$("#projectSkills"+x+"_"+y+" li").length+')" class="list-group-item skill ">' + $("#skillName"+x+"_"+y).val() + '<span class="label label-primary pull-right">' 
                     + ($("#skillLevel"+x+"_"+y+" option:selected").index() + 1 )+ '</span>' 
                     + '<input type="number" hidden name="task['+ x +'][role]['+ y +'][skill]['+$("#projectSkills"+x+"_"+y+" li").length+'][skillID]" value="'+ ( $("#skillName"+x+"_"+y+" option:selected").index() + 1 )+'"/> '
 					+ '<input type="number" hidden name="task['+ x +'][role]['+ y +'][skill]['+$("#projectSkills"+x+"_"+y+" li").length+'][skillLevel]" value="'+ ( $("#skillLevel"+x+"_"+y+" option:selected").index() + 1 )+'"/> '
@@ -221,15 +221,36 @@
                 
                   /// Notes  id and name for role,  the skill required and the number of people wilth thtat sikill and their proficiency,  along with the employee id and name perhaps
                 
-                
+             function delskill(x,y) {
+				 $("#projectSkills"+x+"_"+y+" .selected").remove();
+			}
+  
                 
              $("#delTask").click(function() {
 					$("#projectTasks .selected").remove();
                 });
                 
-            $("#delSkill").click(function() {
-					$("#projectSkills"+x+"_"+y+" .selected").remove();
-                });
+            function selectSkill(x,y,z)    {
+				$("#projectSkills"+x+"_"+y+" .selected").css('background','#fff');
+				$("#projectSkills"+x+"_"+y+" .selected").css('color','#000');
+				$("#projectSkills"+x+"_"+y+" .selected").removeClass("selected");
+				$("#pSkills"+x+"_"+y+"_"+z).addClass("selected");
+				$("#pSkills"+x+"_"+y+"_"+z).css('background','#007');
+				$("#pSkills"+x+"_"+y+"_"+z).css('color','#fff');
+			}
+
+			function selectRole(x,y)    {
+							 $("#projectSkills"+x+" .selected").removeClass("selected");
+							$("#pSkills"+x+"_"+y).addClass("selected");
+							$("#pSkills"+x+"_"+y).css('background','#fff');
+							$("#pSkills"+x+"_"+y).css('color','#000');
+
+					//~ background: #007;
+	//~ color:#fff;
+			}
+            //~ $("#delSkill").click(function() {
+					//~ $("#projectSkills"+x+"_"+y+" .selected").remove();
+                //~ });
             
 			$("#projectSkills"+x+"_"+y).on("click",".skill",function(e) {
 				$(this).parent().children().removeClass("selected");

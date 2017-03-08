@@ -85,7 +85,7 @@ box-shadow: 5px 5px 5px 4px #8CC9FF;
    margin: 0 !important;
 }
 
-#projectSkills .selected {
+.skill .selected {
 	background: #007;
 	color:#fff;
 }
