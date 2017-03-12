@@ -3,19 +3,26 @@
 <head>
   <title>Task Assignment</title>
   <meta charset="utf-8">
+<!--
   <link rel="stylesheet" type="text/css" href="css/mystyle.css">
+-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ 
+
+<!--
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="jquery-3.1.1.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<!--
+
   <link rel='stylesheet' href='http://fullcalendar.io/js/fullcalendar-2.2.3/fullcalendar.css' />
 -->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
  <style type="text/css">
      
@@ -110,7 +117,7 @@
                 <!--            <input type="text" class="form-control" name="taskTitle">-->
                         <ul class="list-group well well-sm pre-scrollable tested" style="max-height: 800px; overflow-y:auto;"  id="projectTasks">
                         </ul>
-                        <button id="delTask" type="button" class="btn btn-primary">Delete</button> 
+                        <button id="delTask" type="button" class="btn btn-primary">Delete Task</button> 
                    </div>
                 </div>
                 
@@ -126,25 +133,42 @@
 			
 			var taskNum =0;	
             $("#create_task").click(function() {
+			var title =   $("#taskTitle").val();
             var j = $("#numOfPeople").val();
             var i;
-            
-              $("#projectTasks").append('<li> <div id="taskcon" class="panel panel-primary"> '+
-              '<div class="panel-heading" name="task['+ taskNum +']"> Task: '+ $("#taskTitle").val() +'   Start Date:'+ $("#datepicker").val() +'       End Date :'+ $("#datepicker2").val() +'       Number Of Roles : '+ $("#numOfPeople").val() +' <a data-toggle="collapse" href="#'+ $("#taskTitle").val() +'"  style="color: #C0C0C0;" >  Click to exand/collapse </a>     </div>'+
-              '<div id="'+ $("#taskTitle").val() +'" class="panel-collapse collapse">'+
-              '<div id="'+ $("#taskTitle").val() +'_roles" class="panel-body">	'+
-              '<input name="task['+ taskNum +'][title]" type="text" value="'+ $("#taskTitle").val() +'" hidden > </input>'+
+            var newtitle = title.replace(" ","_");
+            if(!$("[name='taskTitle']").val()){				
+				alert("Please enter a Task Title.");
+				return;
+			}
+            if(!$("[name='startDate']").val()){				
+				alert("Please enter a Start Date.");
+				return;
+			}
+			if(!$("[name='endDate']").val()){				
+				alert("Please enter an End Date.");
+				return;
+			}
+			if($("#"+newtitle).length) {			
+				alert("A task with the name '"+newtitle+"' already exists.\nPlease enter a unique title.");
+				return;
+			}
+              $("#projectTasks").append('<li id="pTask'+taskNum+'"  onClick="selectTask('+taskNum+')" > <div id="taskcon" class="panel panel-primary"> '+
+              '<div class="panel-heading task"   name="task['+ taskNum +']"> Task: '+ title +'   Start Date:'+ $("#datepicker").val() +'       End Date :'+ $("#datepicker2").val() +'       Number Of Roles : '+ $("#numOfPeople").val() +' <a data-toggle="collapse"  href="#'+ newtitle +'"  style="color: #C0C0C0;" >  Click to exand/collapse </a>     </div>'+
+              '<div id="'+ newtitle +'" class="panel-collapse collapse">'+
+              '<div id="'+ newtitle +'_roles" class="panel-body">	'+
+              '<input name="task['+ taskNum +'][title]" type="text" value="'+ newtitle +'" hidden > </input>'+
 				'<input name="task['+ taskNum +'][startDate]" type="text" value="'+ $("#datepicker").val() +'"  hidden > </input>' +
               '<input name="task['+ taskNum +'][endDate]" type="text" value="'+ $("#datepicker2").val()+'" hidden > </input>' + 
 
-              '<div class="" id="'+ $("#taskTitle").val() +'_table"> '+
+              '<div class="" id="'+ newtitle +'_table"> '+
 							'<label class="text-center">Role Title</label>'+
 							'<label class="text-center">Number of People</label>'+
               '</div id="roletable"></div></li>');
                      
               for (i = 0; i < j; i++)
               {
-              $('#'+ $("#taskTitle").val() +'_table').append('<div class ="panel panel-danger" name="'+taskNum+'_'+ i +'" id="'+ $("#taskTitle").val() +''+ i +'"><div class="panel-heading role">Role '+ (i+1) +'</div>'+
+              $('#'+ newtitle +'_table').append('<div class ="panel panel-danger" name="'+taskNum+'_'+ i +'" id="'+ newtitle +''+ i +'"><div class="panel-heading role">Role '+ (i+1) +'</div>'+
                   '<div><input name="task['+ taskNum +'][role]['+ i +'][name]" type="text" placeholder="Role Title" class="form-control input-md"/> </div>'+
                   '<div><input name="task['+ taskNum +'][role]['+ i +'][numPeople]" placeholder="1" type="number" class="form-control input-md"/> </div>'+ 
                   '<div class="row">' +
@@ -185,7 +209,7 @@
                         '<label for="projectSkills">* Skills Required:</label>'+
                         '<ul class="list-group well well-sm pre-scrollable tested" style="max-height: 240px; overflow-y:auto;"  id="projectSkills'+taskNum+'_'+ i +'">'+
                         '</ul>'+
-                        '<button id="delSkill" type="button" onclick="delskill('+taskNum+','+ i +')" class="btn btn-primary">Delete</button>'+
+                        '<button id="delSkill" type="button" onclick="delskill('+taskNum+','+ i +')" class="btn btn-primary">Delete Skill</button>'+
                    '</div>'+
                ' </div>'+
             '</div></tr>');
@@ -232,30 +256,28 @@
                 
             function selectSkill(x,y,z)    {
 				$("#projectSkills"+x+"_"+y+" .selected").css('background','#fff');
-				$("#projectSkills"+x+"_"+y+" .selected").css('color','#000');
+				$("#projectSkills"+x+"_"+y+" .selected").css('color','#fff');
 				$("#projectSkills"+x+"_"+y+" .selected").removeClass("selected");
 				$("#pSkills"+x+"_"+y+"_"+z).addClass("selected");
 				$("#pSkills"+x+"_"+y+"_"+z).css('background','#007');
 				$("#pSkills"+x+"_"+y+"_"+z).css('color','#fff');
 			}
 
-			function selectRole(x,y)    {
-							 $("#projectSkills"+x+" .selected").removeClass("selected");
-							$("#pSkills"+x+"_"+y).addClass("selected");
-							$("#pSkills"+x+"_"+y).css('background','#fff');
-							$("#pSkills"+x+"_"+y).css('color','#000');
-
-					//~ background: #007;
-	//~ color:#fff;
+			function selectTask(x)    {
+							$("#projectTasks .selected > div .task").css('background','#337ab7');
+							$("#projectTasks .selected ").removeClass("selected");
+							$("#pTask"+x).addClass("selected");
+							$("#pTask"+x+" > div  .task").addClass("foundit");
+							$("#pTask"+x+" > div  .task").css('background','#007');
 			}
             //~ $("#delSkill").click(function() {
 					//~ $("#projectSkills"+x+"_"+y+" .selected").remove();
                 //~ });
             
-			$("#projectSkills"+x+"_"+y).on("click",".skill",function(e) {
-				$(this).parent().children().removeClass("selected");
-				$(this).addClass("selected");
-			});
+			//~ $("#projectSkills"+x+"_"+y).on("click",".skill",function(e) {
+				//~ $(this).parent().children().removeClass("selected");
+				//~ $(this).addClass("selected");
+			//~ });
                 
   $( function()  {
       $( "#datepicker" ).datepicker();
