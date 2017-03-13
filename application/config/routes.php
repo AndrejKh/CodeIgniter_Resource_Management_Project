@@ -62,7 +62,7 @@ $route['search'] = 'page_functions/search';
 $route['project_allocation'] = 'ProjectCreate/allocation';
 $route['create_project'] = 'ProjectCreate/projectCreate';
 $route['create_tasks'] = 'ProjectCreate/createTasks';
-
+$route['admin'] = 'page_functions/adminreg';
 $route['view_profile'] = 'page_functions/view_profile';
 $route['logout'] = 'login/logout';
 $route['(:any)'] = 'page_functions/view/$1';
