@@ -21,7 +21,10 @@
 		<td> <?php echo ' __ '; echo $q->lastname; ?></td>
 		<td> <?php echo ' __ '; echo $q->email; ?></td>
 		<td> <?php echo ' __ '; echo $q->city; ?></td>
+		<td>__<a href=" <?php echo base_url() ; echo "index.php/find_profile/"; echo $q->username; ?>"> Profile</a></td>
 	</tr>
+	<div>
+	</div>
 	<?php } ?>
 </table>
 <?php } ?>

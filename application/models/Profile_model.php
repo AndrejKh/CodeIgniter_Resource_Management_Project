@@ -137,6 +137,27 @@ public function set_account()
 			
 	}
 	
+	
+	public function join_find_profile($usrname){
+				
+		$this->db-> select('*');
+		$this->db->	from('person');
+		$this->db-> join('user_account', 'person.accountID = user_account.accountID');
+		$this->db-> join('address', 'person.addressID = address.addressID');
+		$this->db->	where('user_account.username',$usrname);
+		$this->db-> limit(1);
+		
+		$query = $this->db->get();
+		
+		if($query-> num_rows() != 1){
+			return;
+		}
+		
+		return $query->result_array();
+		
+			
+	}
+	
 	public function load_profile(){
 		$accountID = $this->session->accountID;
 		
